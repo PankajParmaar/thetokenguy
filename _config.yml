@@ -1,7 +1,7 @@
 title: IDAM.CORE
 tagline: Identity & Cloud Security Practitioner
 url: https://pankajparmaar.github.io
-baseurl: ""
+baseurl: "/iam-threat-model"
 lang: en-US
 timezone: Asia/Kolkata
 remote_theme: cotes2046/jekyll-theme-chirpy
