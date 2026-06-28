@@ -1,103 +1,225 @@
+cat << 'EOF' > index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IAM Architecture Threat Modeler</title>
+    <title>Enterprise Zero Trust & IAM Architecture Readiness Engine</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; background: #f4f6f9; color: #333; }
-        h1, h2 { color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        label { font-weight: bold; display: block; margin-bottom: 8px; color: #475569; }
-        select { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 16px; margin-bottom: 20px; }
-        button { background: #2563eb; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; }
-        button:hover { background: #1d4ed8; }
-        .result-box { display: none; margin-top: 20px; }
-        .risk-high { color: #dc2626; font-weight: bold; background: #fee2e2; padding: 4px 8px; border-radius: 4px; }
-        .recommendation { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 15px; margin-top: 10px; border-radius: 0 4px 4px 0; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        :root {
+            --ms-blue: #0078d4;
+            --ms-dark-blue: #005a9e;
+            --neutral-dark: #201f1e;
+            --neutral-light: #f3f2f1;
+            --border-color: #edebe9;
+            --risk-critical: #a80000;
+            --risk-high: #d13438;
+            --risk-medium: #c86c00;
+            --risk-low: #107c41;
+        }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 30px; background: #faf9f8; color: var(--neutral-dark); }
+        header { background: white; padding: 24px; border-radius: 4px; border-left: 4px solid var(--ms-blue); box-shadow: 0 1.6px 3.6px rgba(0,0,0,0.1), 0 0.3px 0.9px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        h1 { margin: 0 0 8px 0; font-size: 24px; font-weight: 600; color: #111; }
+        .meta-line { font-size: 13px; color: #605e5c; margin-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        @media(max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+        .card { background: white; padding: 24px; border-radius: 4px; box-shadow: 0 1.6px 3.6px rgba(0,0,0,0.1); border: 1px solid var(--border-color); }
+        h2 { font-size: 18px; margin-top: 0; color: #201f1e; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .pillar-title { font-weight: 600; }
+        .control-group { margin-bottom: 20px; }
+        label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 6px; color: #323130; }
+        select { width: 100%; padding: 8px 12px; border-radius: 2px; border: 1px solid #a19f9d; font-size: 14px; background: white; }
+        select:focus { border-color: var(--ms-blue); outline: none; }
+        button { background: var(--ms-blue); color: white; border: none; padding: 12px 24px; font-size: 15px; font-weight: 600; border-radius: 2px; cursor: pointer; width: 100%; transition: background 0.2s; }
+        button:hover { background: var(--ms-dark-blue); }
+        .results-area { display: none; }
+        .metric-tile { display: inline-block; padding: 6px 12px; border-radius: 2px; font-weight: 600; font-size: 13px; }
+        .badge-critical { background: #fde7e9; color: var(--risk-critical); }
+        .badge-high { background: #fde7e9; color: var(--risk-high); }
+        .badge-medium { background: #fff4ce; color: var(--risk-medium); }
+        .badge-low { background: #dff6dd; color: var(--risk-low); }
+        .ledger-entry { border-left: 4px solid #a19f9d; padding-left: 15px; margin-bottom: 20px; }
+        .ledger-entry.crit { border-left-color: var(--risk-critical); }
+        .ledger-entry.hi { border-left-color: var(--risk-high); }
+        .ledger-entry.med { border-left-color: var(--risk-medium); }
+        .ledger-entry.lo { border-left-color: var(--risk-low); }
+        .ledger-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+        .ledger-desc { font-size: 14px; color: #323130; margin-bottom: 8px; }
+        .tech-specs { background: #f3f2f1; padding: 12px; border-radius: 2px; font-family: Consolas, Monaco, monospace; font-size: 12px; color: #201f1e; white-space: pre-wrap; }
     </style>
 </head>
 <body>
 
-    <h1>IAM Architecture Threat Modeling Analyzer</h1>
-    <p>Select an architectural scenario below to analyze identity risks and generate cybersecurity architectural mitigations.</p>
+    <header>
+        <h1>Zero Trust Identity Architecture Validation Engine (MVP Hub)</h1>
+        <div class="meta-line">
+            <strong>Architectural Ledger</strong> | Compiled by Senior Directory Services & Identity Solutions Architect (15+ Years Enterprise Runtime Experience)
+        </div>
+        <p style="margin: 0; font-size: 14px; color: #323130;">
+            This evaluation utility maps organizational runtime controls against core architectural baselines to isolate technical debt, exposure points, and precise programmatic remediations.
+        </p>
+    </header>
 
-    <div class="card">
-        <label for="scenario">Select Target Identity Architecture Scenario:</label>
-        <select id="scenario">
-            <option value="sc1">Scenario 1: Legacy Active Directory syncing to Multi-Cloud (Azure/AWS) with permanent admin roles</option>
-            <option value="sc2">Scenario 2: Customer-Facing App (CIAM) using basic session tokens with no risk-based step-up authentication</option>
-            <option value="sc3">Scenario 3: Hybrid Enterprise API Gateway relying entirely on static long-lived API keys for third-party B2B access</option>
-        </select>
-        <button onclick="analyzeArchitecture()">Run Architectural Threat Analysis</button>
-    </div>
+    <div class="grid">
+        <div class="card">
+            <h2><span class="pillar-title">Operational Infrastructure State</span></h2>
+            
+            <div class="control-group">
+                <label for="p1">1. Directory Sync & Cloud Footprint Isolation</label>
+                <select id="p1">
+                    <option value="p1_legacy">Line-of-sight AD sync via Tier-0 service accounts with standing synchronization permissions</option>
+                    <option value="p1_hybrid">Cloud-native lightweight agent execution with localized on-prem read permissions</option>
+                    <option value="p1_modern">Decoupled cloud-native source of truth (HR-driven Provisioning) with explicit write-back isolations</option>
+                </select>
+            </div>
 
-    <div id="result" class="card result-box">
-        <h2>Threat Analysis Report</h2>
-        <div id="analysisOutput"></div>
+            <div class="control-group">
+                <label for="p2">2. Administrative Privilege Lifecycle Enforcement</label>
+                <select id="p2">
+                    <option value="p2_standing">Permanent, persistent administrative directory roles assigned directly to human operators</option>
+                    <option value="p2_jit">Just-In-Time (JIT) workflow orchestration requiring ticket reference but basic SMS/Voice verification</option>
+                    <option value="p2_pim">Phishing-resistant PIM role activation constrained by continuous location and device health validation</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="p3">3. Session Resilience & Token Issuance Architecture</label>
+                <select id="p3">
+                    <option value="p3_static">Static OAuth2/OIDC token issuance with fixed lifetimes (typically 1 hour) without telemetry evaluation</option>
+                    <option value="p3_risky">Conditional Access profiling limited only to initial login authentication pipeline checkpoints</option>
+                    <option value="p3_caep">Continuous Access Evaluation Protocol (CAEP) tracking explicit signal shifts in real-time token state</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="p4">4. B2B & Supply Chain Ingress Verification</label>
+                <select id="p4">
+                    <option value="p4_static">External partner ingress authenticated completely via long-lived, static API keys or shared application secrets</option>
+                    <option value="p4_saml">Federated inbound SAML/OIDC linkages relying exclusively on partner-side cryptographic assertions</option>
+                    <option value="p4_mtls">Strict mutual TLS (mTLS) mapping tied explicitly to OAuth 2.0 Private Key JWT validation parameters</option>
+                </select>
+            </div>
+
+            <button onclick="evaluateMaturityEngine()">Execute Architectural Assessment</button>
+        </div>
+
+        <div class="card results-area" id="resultsCard">
+            <h2>
+                <span class="pillar-title">Target Remediation Ledger</span>
+                <span id="compositeScore" class="metric-tile"></span>
+            </h2>
+            <div id="ledgerOutput"></div>
+        </div>
     </div>
 
     <script>
-        function analyzeArchitecture() {
-            const scenario = document.getElementById('scenario').value;
-            const output = document.getElementById('analysisOutput');
-            const resultBox = document.getElementById('result');
+        function evaluateMaturityEngine() {
+            const p1 = document.getElementById('p1').value;
+            const p2 = document.getElementById('p2').value;
+            const p3 = document.getElementById('p3').value;
+            const p4 = document.getElementById('p4').value;
             
-            let html = '';
+            let severityPoints = 0;
+            let htmlLedger = '';
 
-            if (scenario === 'sc1') {
-                html = `
-                    <p><strong>Primary Vector:</strong> Identity Federation & Privilege Escalation</p>
-                    <p><strong>Risk Rating:</strong> <span class="risk-high">CRITICAL / HIGH</span></p>
-                    <h3>Identified Vulnerabilities:</h3>
-                    <ul>
-                        <li>Lateral movement from compromised on-premises AD domain controllers upward into cloud tenants via synced high-privilege synchronization accounts.</li>
-                        <li>Standing privileges ("Always-On" Global Admin/Root) violate Least Privilege enforcement models.</li>
-                    </ul>
-                    <div class="recommendation">
-                        <strong>Architectural Remediation Strategy:</strong><br>
-                        1. Isolate the identity synchronization footprint by moving to cloud-native agent runtimes.<br>
-                        2. Deploy Privileged Identity Management (PIM / PAM) implementing Just-In-Time (JIT) activation with mandatory phishing-resistant MFA step-up.<br>
-                        3. Break federation dependency for break-glass cloud emergency accounts.
-                    </div>
-                `;
-            } else if (scenario === 'sc2') {
-                html = `
-                    <p><strong>Primary Vector:</strong> Session Hijacking & Credential Stuffing</p>
-                    <p><strong>Risk Rating:</strong> <span class="risk-high">MEDIUM / HIGH</span></p>
-                    <h3>Identified Vulnerabilities:</h3>
-                    <ul>
-                        <li>Lack of continuous access evaluation leaves user sessions vulnerable to session hijacking via Infostealer malware cookie theft.</li>
-                        <li>No contextual or behavioral evaluation (IP changes, impossible travel) to trigger security controls.</li>
-                    </ul>
-                    <div class="recommendation">
-                        <strong>Architectural Remediation Strategy:</strong><br>
-                        1. Implement Continuous Access Evaluation Protocol (CAEP) to revoke active tokens immediately upon security state alterations.<br>
-                        2. Integrate a Risk Engine evaluating device hygiene, network velocity, and user behavior to mandate step-up authentication.
-                    </div>
-                `;
-            } else if (scenario === 'sc3') {
-                html = `
-                    <p><strong>Primary Vector:</strong> B2B Supply Chain & Non-Repudiation Failures</p>
-                    <p><strong>Risk Rating:</strong> <span class="risk-high">HIGH</span></p>
-                    <h3>Identified Vulnerabilities:</h3>
-                    <ul>
-                        <li>Static secrets embedded in third-party partner codebases lack cryptographic rotation, increasing systemic exposure during partner breaches.</li>
-                        <li>No contextual validation of incoming client certificates or source constraints.</li>
-                    </ul>
-                    <div class="recommendation">
-                        <strong>Architectural Remediation Strategy:</strong><br>
-                        1. Deprecate static api keys in favor of OAuth 2.0 Client Credentials Grant leveraging private_key_jwt validation mechanisms.<br>
-                        2. Enforce Mutual TLS (mTLS) constraints at the API Gateway layer to guarantee transport-level origin verification.
-                    </div>
-                `;
+            // Compute Control 1
+            if (p1 === 'p1_legacy') {
+                severityPoints += 4;
+                htmlLedger += createLedgerEntry('crit', 'CRITICAL RISK: Tier-0 Directory Line-of-Sight Escape', 
+                    'Your configuration exposes your entire cloud tenant to lateral translation attacks if the on-premise AD environment falls. Attackers compromising Active Directory can immediately inject directory sync changes or manipulate metadata attributes.',
+                    'Remediation Protocol:\n- Deprecate traditional direct synchronization runtimes.\n- Deploy decoupled Microsoft Entra Cloud Sync agents to strip Tier-0 write capabilities.\n- Ensure directory write-backs are explicitly scoped to isolated target organizational units (OUs).');
+            } else if (p1 === 'p1_hybrid') {
+                severityPoints += 2;
+                htmlLedger += createLedgerEntry('med', 'MEDIUM RISK: Hybrid Sync Footprint Exposure',
+                    'While explicit synchronization infrastructure is localized, directory correlation points still allow user tracking vectors across domain boundaries.',
+                    'Remediation Protocol:\n- Harden domain controller host configurations.\n- Implement cloud-side conditional checking on the synchronization workload account explicitly.');
+            } else {
+                htmlLedger += createLedgerEntry('lo', 'OPTIMAL: Segregated Cloud Identity Sourcing',
+                    'Identity data flows unidirectionally from decoupled HR abstractions into the target cloud runtime, preventing perimeter escalations.',
+                    'Validation Verified:\n- Continuous attribute monitoring confirmed.\n- Perimeter domain breakout vector neutralized.');
             }
 
-            output.innerHTML = html;
-            resultBox.style.display = 'block';
+            // Compute Control 2
+            if (p2 === 'p2_standing') {
+                severityPoints += 4;
+                htmlLedger += createLedgerEntry('crit', 'CRITICAL RISK: Standing Administrative Privileges Detected',
+                    'Permanent assignment of global administrative privileges violates zero trust containment principles. Compromise of an active operator session yields immediate blast radius escalation.',
+                    'Remediation Protocol:\n- Enforce complete structural deletion of all direct administrative assignments.\n- Configure Privileged Identity Management (PIM) directory frameworks requiring cryptographic validation upon role elevation inputs.');
+            } else if (p2 === 'p2_jit') {
+                severityPoints += 3;
+                htmlLedger += createLedgerEntry('hi', 'HIGH RISK: Weak Elevation Factor Interception',
+                    'Just-in-Time activation reduces temporal exposure, but relying on legacy SMS or voice verification channels leaves workflows vulnerable to SIM-swap attacks.',
+                    'Remediation Protocol:\n- Mandate phishing-resistant cryptographic authentication constraints (FIDO2 or certificate-based bindings) directly within elevation verification pipelines.');
+            } else {
+                htmlLedger += createLedgerEntry('lo', 'OPTIMAL: Cryptographically Hardened Just-In-Time Elevation',
+                    'Privilege lifecycles are restricted to tightly monitored temporal scopes backed by active, phishing-resistant device health validations.',
+                    'Validation Verified:\n- Zero standing privilege footprint confirmed across global/root tiers.');
+            }
+
+            // Compute Control 3
+            if (p3 === 'p3_static') {
+                severityPoints += 3;
+                htmlLedger += createLedgerEntry('hi', 'HIGH RISK: Fixed-Life Token Vulnerability (Infostealer Vector)',
+                    'Issuing tokens with static, immutable lifetimes permits unauthorized access even if user state changes or an anomalous device displacement is registered.',
+                    'Remediation Protocol:\n- Upgrade token infrastructure architectures to handle real-time session revocation dynamics.\n- Explicitly coordinate telemetry updates between identity runtimes and infrastructure network points.');
+            } else if (p3 === 'p3_risky') {
+                severityPoints += 2;
+                htmlLedger += createLedgerEntry('med', 'MEDIUM RISK: Static Conditional Access Boundaries',
+                    'Evaluating metrics solely at the initial authentication border fails to secure active user sessions if the access token is intercepted post-auth.',
+                    'Remediation Protocol:\n- Activate Continuous Access Evaluation Frameworks.\n- Enable strict token-binding protocols to bind cryptographic material directly to specific hardware platform keys.');
+            } else {
+                htmlLedger += createLedgerEntry('lo', 'OPTIMAL: Continuous Access Evaluation Interfacing',
+                    'Session integrity is continually monitored against runtime event signals, allowing immediate token termination upon security state modification alerts.',
+                    'Validation Verified:\n- Dynamic risk engines are actively polling structural compliance changes.');
+            }
+
+            // Compute Control 4
+            if (p4 === 'p4_static') {
+                severityPoints += 4;
+                htmlLedger += createLedgerEntry('crit', 'CRITICAL RISK: Static Secrets in Supply-Chain Vector',
+                    'Using persistent, unrotated API keys creates immediate vulnerabilities. Compromise of a vendor platform compromises your perimeter ingress points.',
+                    'Remediation Protocol:\n- Fully deprecate symmetric shared secrets within external API configurations.\n- Transition to asymmetric validation parameters enforcing private_key_jwt credentials grants.');
+            } else if (p4 === 'p4_saml') {
+                severityPoints += 2;
+                htmlLedger += createLedgerEntry('med', 'MEDIUM RISK: Federated Sign-On Reliance',
+                    'Relying entirely on external cryptographic assertions exposes your ecosystem to attacks if the partner directory configuration is modified or compromised.',
+                    'Remediation Protocol:\n- Enforce cross-tenant access control policies.\n- Mandate secondary inbound checking models to validate incoming identities against internal trust metrics.');
+            } else {
+                htmlLedger += createLedgerEntry('lo', 'OPTIMAL: Asymmetric mTLS Transport Verification',
+                    'External inbound pipelines require combined mutual TLS verification alongside cryptographically isolated private key JSON web token architectures.',
+                    'Validation Verified:\n- Edge termination layers explicitly filter incoming identity assertions.');
+            }
+
+            // Set Dashboard Score Indicators
+            const scoreTile = document.getElementById('compositeScore');
+            if (severityPoints >= 10) {
+                scoreTile.innerText = 'STATE: COMPROMISE IMMINENT';
+                scoreTile.className = 'metric-tile badge-critical';
+            } else if (severityPoints >= 5) {
+                scoreTile.innerText = 'STATE: TECHNICAL DEBT ACCUMULATED';
+                scoreTile.className = 'metric-tile badge-high';
+            } else if (severityPoints >= 2) {
+                scoreTile.innerText = 'STATE: MONITORING REQUIRED';
+                scoreTile.className = 'metric-tile badge-medium';
+            } else {
+                scoreTile.innerText = 'STATE: ZERO TRUST COMPLIANT';
+                scoreTile.className = 'metric-tile badge-low';
+            }
+
+            document.getElementById('ledgerOutput').innerHTML = htmlLedger;
+            document.getElementById('resultsCard').style.display = 'block';
+        }
+
+        function createLedgerEntry(status, title, desc, spec) {
+            return `
+                <div class="ledger-entry ${status}">
+                    <div class="ledger-title">${title}</div>
+                    <div class="ledger-desc">${desc}</div>
+                    <div class="tech-specs">${spec}</div>
+                </div>
+            `;
         }
     </script>
 </body>
 </html>
+EOF
