@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAM Architecture Threat Modeler</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; background: #f4f6f9; color: #333; }
+        h1, h2 { color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        label { font-weight: bold; display: block; margin-bottom: 8px; color: #475569; }
+        select { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 16px; margin-bottom: 20px; }
+        button { background: #2563eb; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; }
+        button:hover { background: #1d4ed8; }
+        .result-box { display: none; margin-top: 20px; }
+        .risk-high { color: #dc2626; font-weight: bold; background: #fee2e2; padding: 4px 8px; border-radius: 4px; }
+        .recommendation { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 15px; margin-top: 10px; border-radius: 0 4px 4px 0; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <h1>IAM Architecture Threat Modeling Analyzer</h1>
+    <p>Select an architectural scenario below to analyze identity risks and generate cybersecurity architectural mitigations.</p>
+
+    <div class="card">
+        <label for="scenario">Select Target Identity Architecture Scenario:</label>
+        <select id="scenario">
+            <option value="sc1">Scenario 1: Legacy Active Directory syncing to Multi-Cloud (Azure/AWS) with permanent admin roles</option>
+            <option value="sc2">Scenario 2: Customer-Facing App (CIAM) using basic session tokens with no risk-based step-up authentication</option>
+            <option value="sc3">Scenario 3: Hybrid Enterprise API Gateway relying entirely on static long-lived API keys for third-party B2B access</option>
+        </select>
+        <button onclick="analyzeArchitecture()">Run Architectural Threat Analysis</button>
+    </div>
+
+    <div id="result" class="card result-box">
+        <h2>Threat Analysis Report</h2>
+        <div id="analysisOutput"></div>
+    </div>
+
+    <script>
+        function analyzeArchitecture() {
+            const scenario = document.getElementById('scenario').value;
+            const output = document.getElementById('analysisOutput');
+            const resultBox = document.getElementById('result');
+            
+            let html = '';
+
+            if (scenario === 'sc1') {
+                html = `
+                    <p><strong>Primary Vector:</strong> Identity Federation & Privilege Escalation</p>
+                    <p><strong>Risk Rating:</strong> <span class="risk-high">CRITICAL / HIGH</span></p>
+                    <h3>Identified Vulnerabilities:</h3>
+                    <ul>
+                        <li>Lateral movement from compromised on-premises AD domain controllers upward into cloud tenants via synced high-privilege synchronization accounts.</li>
+                        <li>Standing privileges ("Always-On" Global Admin/Root) violate Least Privilege enforcement models.</li>
+                    </ul>
+                    <div class="recommendation">
+                        <strong>Architectural Remediation Strategy:</strong><br>
+                        1. Isolate the identity synchronization footprint by moving to cloud-native agent runtimes.<br>
+                        2. Deploy Privileged Identity Management (PIM / PAM) implementing Just-In-Time (JIT) activation with mandatory phishing-resistant MFA step-up.<br>
+                        3. Break federation dependency for break-glass cloud emergency accounts.
+                    </div>
+                `;
+            } else if (scenario === 'sc2') {
+                html = `
+                    <p><strong>Primary Vector:</strong> Session Hijacking & Credential Stuffing</p>
+                    <p><strong>Risk Rating:</strong> <span class="risk-high">MEDIUM / HIGH</span></p>
+                    <h3>Identified Vulnerabilities:</h3>
+                    <ul>
+                        <li>Lack of continuous access evaluation leaves user sessions vulnerable to session hijacking via Infostealer malware cookie theft.</li>
+                        <li>No contextual or behavioral evaluation (IP changes, impossible travel) to trigger security controls.</li>
+                    </ul>
+                    <div class="recommendation">
+                        <strong>Architectural Remediation Strategy:</strong><br>
+                        1. Implement Continuous Access Evaluation Protocol (CAEP) to revoke active tokens immediately upon security state alterations.<br>
+                        2. Integrate a Risk Engine evaluating device hygiene, network velocity, and user behavior to mandate step-up authentication.
+                    </div>
+                `;
+            } else if (scenario === 'sc3') {
+                html = `
+                    <p><strong>Primary Vector:</strong> B2B Supply Chain & Non-Repudiation Failures</p>
+                    <p><strong>Risk Rating:</strong> <span class="risk-high">HIGH</span></p>
+                    <h3>Identified Vulnerabilities:</h3>
+                    <ul>
+                        <li>Static secrets embedded in third-party partner codebases lack cryptographic rotation, increasing systemic exposure during partner breaches.</li>
+                        <li>No contextual validation of incoming client certificates or source constraints.</li>
+                    </ul>
+                    <div class="recommendation">
+                        <strong>Architectural Remediation Strategy:</strong><br>
+                        1. Deprecate static api keys in favor of OAuth 2.0 Client Credentials Grant leveraging private_key_jwt validation mechanisms.<br>
+                        2. Enforce Mutual TLS (mTLS) constraints at the API Gateway layer to guarantee transport-level origin verification.
+                    </div>
+                `;
+            }
+
+            output.innerHTML = html;
+            resultBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
