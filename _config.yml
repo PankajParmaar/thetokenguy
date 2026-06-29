@@ -17,3 +17,7 @@ plugins:
   - jekyll-archives
   - jekyll-paginate
   - jekyll-sitemap
+
+# Pagination configurations
+paginate: 10
+paginate_path: '/page:num'
