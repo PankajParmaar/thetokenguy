@@ -1,0 +1,8 @@
+-
+  title: Home
+  url: /
+  icon: fas fa-home
+-
+  title: About
+  url: /about/
+  icon: fas fa-info-circle
