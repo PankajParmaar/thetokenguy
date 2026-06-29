@@ -21,3 +21,9 @@ plugins:
 # Pagination configurations
 paginate: 10
 paginate_path: '/page:num'
+
+author:
+  name: Pankaj Parmaar
+  url: https://linkedin.com/in/pankajparmaar
+
+avatar: /assets/img/avatar.jpg
