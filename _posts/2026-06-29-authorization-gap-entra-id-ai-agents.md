@@ -36,17 +36,17 @@ It isn't done. The access token represents the human user's data footprint — w
 
 In a standard user-delegated authentication flow, an application requests an access token from the Microsoft identity platform containing scope claims (`scp`). Once granted, the resulting JWT establishes the security context entirely on the human subject (`sub`) — not on whatever is actually using the token downstream.
 
-```plaintext
-+--------------+      1. Interactive Auth / MFA      +-------------------+
-|  Human User  | ----------------------------------> |  Microsoft Entra  |
-+--------------+                                     +-------------------+
-       |                                                       |
-       | 2. Spawns Context                                     | 3. Mints Token
-       v                                                       v    (User Context Only)
-+--------------+                                     +-------------------+
-|   AI Agent   | ==================================> | Target Repository |
-+--------------+    4. Executes Arbitrary Action     +-------------------+
-                     Using Valid User Token (Blind)
+```mermaid
+sequenceDiagram
+    participant H as Human User
+    participant E as Microsoft Entra
+    participant A as AI Agent
+    participant T as Target Repository
+
+    H->>E: 1. Interactive Auth / MFA
+    H->>A: 2. Spawns Context
+    E->>A: 3. Mints Token (User Context Only)
+    A->>T: 4. Executes Action Using Valid User Token (Blind)
 ```
 
 When an AI agent consumes this token to parse directories, extract files, or call APIs, the platform validates whether the human user is entitled to perform that action. It cannot validate whether the agent should be the one performing it.
