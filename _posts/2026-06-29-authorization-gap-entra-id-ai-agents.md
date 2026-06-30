@@ -4,6 +4,7 @@ title: "The Authorization Gap: What Entra ID Actually Controls When an AI Agent 
 date: 2026-06-29 12:00:00 +0530
 categories: [Machine Identity, Zero Trust]
 tags: [entra-id, ai-security, zero-trust, token-delegation, machine-identity]
+permalink: /posts/authorization-gap-entra-id-ai-agents/
 author: pankaj
 description: "When an AI agent leverages user-delegated tokens, standard perimeter checks break. This post maps the structural dual-actor blind spot inside Entra ID and outlines immediate containment strategies."
 ---
