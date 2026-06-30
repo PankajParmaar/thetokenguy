@@ -6,22 +6,35 @@ categories: [Machine Identity, Zero Trust]
 tags: [entra-id, ai-security, zero-trust, token-delegation, machine-identity]
 permalink: /posts/authorization-gap-entra-id-ai-agents/
 author: pankaj
-description: "When an AI agent leverages user-delegated tokens, standard perimeter checks break. This post maps the structural dual-actor blind spot inside Entra ID and outlines immediate containment strategies."
+description: "When an AI agent uses a delegated user token, standard identity checks break silently. This post maps the dual-actor blind spot inside Entra ID and the containment strategy architects need today."
+toc: true
 ---
 
-## Executive Briefing
+## TL;DR — What You Need Right Now
 
-The enterprise adoption of agentic AI systems has introduced an existential challenge to the foundational premise of modern Identity and Access Management (IAM). When an AI agent—whether a native Microsoft 365 Copilot integration, an advanced custom LLM workflow running over the Model Context Protocol (MCP), or a cross-tenant third-party integration—acts on behalf of an enterprise user, the underlying identity engine must evaluate trust.
+**Problem:** When an AI agent acts on behalf of a user, it rides the user's access token. Entra ID validates the user's permissions, but has no native way to evaluate whether the agent itself should be performing that action.
 
-The industry assumes this is a solved problem covered by standard OAuth delegation protocols. It is not. 
+**Fix:** There is no single fix. The containment strategy combines Workload Identity Premium (for the agent's own service principal) with aggressive user-side Conditional Access (for the delegated token's exposure window). These two controls operate on different planes and do not cover each other — that gap is the point of this post.
 
-The core architectural flaw is simple: **The modern authorization graph has no native, unified concept of "an agent executing an action on behalf of a human."** When an AI system initiates down-stream transactions, it rides an access token that represents the user’s explicit data footprint, but the identity platform remains entirely blind to the agent's internal intent, decision-making path, or execution context. This structural blind spot is the **Authorization Gap**.
+**Time to implement:** Containment steps below take 1-2 days for a mature Entra tenant. The underlying gap has no native fix yet.
+
+> **Jump to:** [The Mechanics](#technical-architecture--the-mechanics-of-the-gap) | [My Take](#the-operational-reality--my-take) | [Mitigation Playbook](#immediate-mitigation-playbook-for-architects) | [CISO Note](#ciso-advisory-note)
 
 ---
 
-## Technical Architecture & The Mechanics of the Gap
+## Operational Context
 
-In a standard user-delegated authentication flow, an application requests an access token from the Microsoft identity platform containing specific scope claims (`scp`). When granted, the resulting JSON Web Token (JWT) establishes the security context entirely on the human subject (`sub`).
+Enterprise adoption of agentic AI has outpaced the identity architecture meant to govern it. Microsoft 365 Copilot integrations, custom LLM workflows running over the Model Context Protocol (MCP), and cross-tenant AI connectors are now routinely acting inside production tenants — reading mailboxes, querying SharePoint, calling Graph API, executing workflows.
+
+The assumption inside most security teams is that this is a solved problem. Standard OAuth delegation issues a token, the token carries scopes, the scopes are enforced. Job done.
+
+It isn't done. The access token represents the human user's data footprint — what they're allowed to touch. It says nothing about whether the thing currently using that token is the human, a deterministic application, or an autonomous agent making decisions based on a prompt that could have been manipulated. Entra ID cannot see that distinction. **The modern authorization graph has no native, unified concept of "an agent executing an action on behalf of a human."** That's the Authorization Gap, and it's why this post exists.
+
+---
+
+## Technical Architecture — The Mechanics of the Gap
+
+In a standard user-delegated authentication flow, an application requests an access token from the Microsoft identity platform containing scope claims (`scp`). Once granted, the resulting JWT establishes the security context entirely on the human subject (`sub`) — not on whatever is actually using the token downstream.
 
 ```plaintext
 +--------------+      1. Interactive Auth / MFA      +-------------------+
@@ -34,45 +47,90 @@ In a standard user-delegated authentication flow, an application requests an acc
 |   AI Agent   | ==================================> | Target Repository |
 +--------------+    4. Executes Arbitrary Action     +-------------------+
                      Using Valid User Token (Blind)
-When an AI agent consumes this token to parse directories, extract files, or interact with APIs, the token validation process evaluates whether the human user has the rights to perform that action. However, it cannot verify if the agent should be the one driving that action.
-Why the Token Plane is Blind
+```
 
-    Context Over-Privilege: If an executive has access to sensitive payroll data, any delegated AI agent operating within their user session inherently possesses the authority to fetch that payroll data.
+When an AI agent consumes this token to parse directories, extract files, or call APIs, the platform validates whether the human user is entitled to perform that action. It cannot validate whether the agent should be the one performing it.
 
-    Intent Obfuscation: Traditional applications execute hardcoded, deterministic API requests. AI agents operate via dynamic prompt orchestration. Entra ID can evaluate the token at the time of issuance, but it cannot analyze the prompt context to determine if the LLM was manipulated via prompt injection to bypass corporate data compliance boundaries.
+**Why the token plane is blind:**
 
-The Operational Reality: "My Take"
+- **Context over-privilege.** If an executive can access payroll data, any AI agent operating inside that executive's session inherits the same authority by default. There is no narrower scope available at the agent layer.
+- **Intent obfuscation.** Traditional applications make deterministic, hardcoded API calls. AI agents act on dynamic prompt orchestration. Entra ID evaluates the token at issuance — it has no mechanism to evaluate whether the prompt driving the agent's next action was manipulated via injection to walk past a compliance boundary.
+
+---
+
+## Engineering Constraints & Edge Cases
+
+| Constraint | Condition | Why it matters |
+|---|---|---|
+| Workload Identity CA scope | Only governs the service principal's own authentication | Has zero visibility into delegated user tokens the agent is also consuming |
+| Continuous Access Evaluation (CAE) | Revokes on critical events (password reset, disable, location shift) | Does not revoke based on agent behavior or prompt-level anomalies |
+| Sign-in frequency controls | Caps token lifetime at re-authentication intervals | Shortens the exposure window but does not close it — the agent can still act freely within that window |
+| Custom security attributes | Manual tagging effort required | Only as good as your tenant's discipline in tagging every AI-integrated app registration |
+
+**Known failure mode:** A delegated token issued under a legitimate, compliant sign-in is fully valid for its entire lifetime — regardless of what the agent does with it after issuance. There is no re-evaluation tied to agent-driven action.
+
+---
+
+## The Operational Reality — My Take
 
 Neither extreme is the right answer, and any architect recommending either one isn't operating in a real enterprise.
 
-Blocking delegated AI integrations entirely is a governance posture that lasts about 90 days before a business unit deploys Copilot anyway and you’ve just lost visibility. You don't win by saying no—you win by being the person who built the guardrails before the business ran past you.
+Blocking delegated AI integrations entirely is a governance posture that lasts about 90 days before a business unit deploys Copilot anyway and you've just lost visibility. You don't win by saying no — you win by being the person who built the guardrails before the business ran past you.
 
 But micro-segmented, app-specific permissions at the API layer is architecturally correct and operationally brutal. In a mid-size M365 tenant with 200+ app registrations already in various states of hygiene, telling someone to retroactively scope every integration to least-privilege API permissions is a 12-month program, not a control. It's the right destination but a dishonest recommendation as an immediate fix.
 
-The actual practitioner answer: You instrument first, restrict second. Deploy Workload Identity Premium, get visibility into what your service principals and delegated integrations are actually doing, and establish a baseline—then you can make a scoping argument grounded in real usage data rather than theoretical least-privilege. Simultaneously, you push for Conditional Access policies for workload identities as the nearest available approximation of dual-actor validation while Microsoft's authorization model matures.
+The actual practitioner answer: you instrument first, restrict second. Deploy Workload Identity Premium, get visibility into what your service principals and delegated integrations are actually doing, and establish a baseline. Then you can make a scoping argument grounded in real usage data rather than theoretical least-privilege. Simultaneously, push for Conditional Access policies for workload identities as the nearest available approximation of dual-actor validation while Microsoft's authorization model matures.
 
-However, we must introduce one critical, honest qualification that many senior reviewers miss: These two controls operate on entirely different identity planes and do not talk to each other. Workload Identity CA policies govern the service principal’s autonomous authentication window. User-side CA governs the interactive user's session parameters. When an AI agent leverages a delegated token, the user’s CA policy is applied strictly at sign-in time—but the agent’s subsequent autonomous actions are riding that user token down-stream with zero real-time agent context evaluation. Workload Identity Premium has no visibility into that delegated user context.
+Here's the qualification a senior reviewer will look for, and the one most architects skip: **these two controls operate on entirely different identity planes and do not talk to each other.** Workload Identity CA governs the service principal's own authentication window. User-side CA governs the human's interactive session. When an AI agent uses a delegated token, the user's CA policy was already satisfied at sign-in — the agent's subsequent actions ride that token downstream with zero further evaluation. Workload Identity Premium has no visibility into that delegated context. There is currently no native Entra control that asks "is the actor consuming this token right now still the human who authenticated it?"
 
-There is currently no native Entra control that says "re-evaluate access when the actor consuming this token is not the human who authenticated." The dual-actor validation gap remains open, and architects need to be completely honest about that limitation rather than presenting these components as a completely solved problem. The "wait for Microsoft to solve it natively" position is the most dangerous of all—that's how you get to a 2028 breach post-mortem where someone says the gap was known in 2026.
-Immediate Mitigation Playbook for Architects
+The dual-actor validation gap remains open. Architects need to say that plainly rather than presenting these two controls stacked together as a solved problem. The "wait for Microsoft to solve it natively" position is the most dangerous of all — that's how you end up in a 2028 breach post-mortem where someone notes the gap was known and documented in 2026.
 
-Until true dual-actor token validation matures natively within the directory, enterprise security architects must build a containment boundary by combining separate controls across both planes to reduce the blast radius.
-Step 1: Maximize User-Side Session Freshness
+---
 
-To compress the exposure window of active user-delegated tokens being utilized by integrations, enforce aggressive session parameters on groups interacting with AI orchestration systems.
+## Immediate Mitigation Playbook for Architects
 
-    Continuous Access Evaluation (CAE): Ensure CAE is universally active to instantly revoke sessions upon critical events (e.g., password resets, account disabling, or explicit location shifts).
+Until native dual-actor token validation exists, the containment strategy is to combine controls across both planes to reduce blast radius — not to close the gap, but to shrink it.
 
-    Sign-in Frequency Controls: Reduce token lifetimes for highly privileged users down to explicit operational windows (e.g., 4 to 8 hours) when interacting with non-native AI app layers.
+**Step 1 — Maximize user-side session freshness**
 
-Step 2: Establish Workload Identity Perimeters
+- **Continuous Access Evaluation (CAE):** keep it universally active so sessions revoke instantly on password reset, account disable, or location shift.
+- **Sign-in frequency controls:** reduce token lifetimes for privileged users to 4-8 hour windows specifically for groups interacting with AI orchestration layers.
 
-For custom AI connectors, plugins, or third-party automated agents utilizing dedicated application parameters:
+**Step 2 — Establish workload identity perimeters**
 
-    Target Single-Tenant Service Principals: Isolate AI app registrations completely and enforce explicit location boundaries via Conditional Access for Workload Identities.
+- **Single-tenant service principals:** isolate AI app registrations and enforce explicit location boundaries via Conditional Access for Workload Identities.
+- **Managed identities over secrets:** migrate background workloads to Azure Managed Identities wherever possible, eliminating standing client secrets and certificate export risk.
 
-    Implement Managed Identities: Wherever possible, eliminate client secrets or certificates entirely by migrating background workloads to Azure Managed Identities, removing standing credential export risks.
+**Step 3 — Enforce structural application filters**
 
-Step 3: Enforce Structural Application Filters
+- Tag AI-integrated applications using custom security attributes (e.g., `AI_Agent_Active`) so you can target conditional policies and incident response playbooks at exactly that population without touching unrelated app registrations.
 
-Utilize custom security attributes within Microsoft Entra ID to classify your AI applications based on their data access tiering levels. This lets you write explicit policies targeting any app tagged with an AI_Agent_Active attribute, ensuring that high-risk workloads can be isolated instantly via automated incident response playbooks if anomalous behavior is flagged.
+---
+
+## Threat Register Mapping
+
+| Threat Vector | MITRE ATT&CK | Control This Addresses |
+|---|---|---|
+| Delegated token reuse by autonomous agent beyond user intent | T1550.001 | Sign-in frequency + CAE shrink the exposure window |
+| Prompt injection driving unauthorized downstream API calls | T1565 (adjacent) | Application tagging enables targeted incident response, not prevention |
+| Standing credentials on AI service principals | T1078.004 | Managed Identity migration removes exportable secrets |
+
+---
+
+## CISO Advisory Note
+
+The business risk here isn't theoretical — it's a timing problem. Every AI integration deployed today is operating with a known, documented gap in dual-actor validation. That's an acceptable risk to carry *if* it's a conscious decision with compensating controls in place. It's an unacceptable risk to carry by default because no one flagged it.
+
+**Recommended ask:** request a current inventory of AI-integrated app registrations and their Conditional Access coverage today. If Workload Identity Premium isn't licensed, that's a budget conversation worth having before your AI footprint grows further — not after an incident makes the case for you.
+
+---
+
+## References & Further Reading
+
+- Microsoft Learn — Conditional Access for workload identities
+- Microsoft Learn — Continuous Access Evaluation overview
+- MITRE ATT&CK — Use of Alternate Authentication Material
+
+---
+*Filed under: Machine Identity, Zero Trust | Depth: Architecture, CISO Advisory*
+*Last validated: June 2026 against Entra ID Workload Identity Premium capabilities*
