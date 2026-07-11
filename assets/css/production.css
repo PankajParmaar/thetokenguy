@@ -132,8 +132,9 @@ code, pre, kbd, .content .breadcrumb, #breadcrumb {
   padding: 16px 0;
 }
 #sidebar .statusblock b { font-weight: 500; color: var(--phosphor); }
-#sidebar .statusblock .row { display: flex; gap: 14px; }
-#sidebar .statusblock .k { width: 62px; flex: none; color: #5c6e64; }
+#sidebar .statusblock .row { display: flex; flex-wrap: nowrap; gap: 14px; }
+#sidebar .statusblock .k { width: 74px; flex: none; color: #5c6e64; }
+#sidebar .statusblock .row > :last-child { min-width: 0; flex: 1 1 auto; }
 #sidebar .dot {
   display: inline-block;
   width: 7px; height: 7px;
