@@ -109,7 +109,7 @@ layout: default
     </li>
   {% endfor %}
 </ul>
-<a class="allentries" href="{{ '/archives/' | relative_url }}">browse all {{ site.posts.size }} entries &rarr;</a>
+<a class="allentries" href="{{ '/archives/' | relative_url }}">browse all {{ site.posts.size }} {% if site.posts.size == 1 %}entry{% else %}entries{% endif %} &rarr;</a>
 
 <h2 class="sect" id="about">About the operator</h2>
 <div class="about">

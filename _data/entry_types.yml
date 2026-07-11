@@ -8,11 +8,4 @@
 # design-note  - conceptual / architectural / strategic writing
 # runbook      - has a concrete, repeatable procedure or script
 # field-test   - hands-on remediation or measurement against a real technique
-app-registration-secret-sprawl: design-note
 authorization-gap-entra-id-ai-agents: design-note
-ciso-advisory-identity-playbook: design-note
-ciso-advisory-incident-response: runbook
-conditional-access-audit: runbook
-session-hijacking-infostealer: field-test
-strategic-horizon-roadmap: design-note
-tenant-diagnostics-automation: runbook
