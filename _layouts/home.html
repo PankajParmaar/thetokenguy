@@ -25,7 +25,7 @@
       <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
       <p class="hero-deck">{{ featured.description }}</p>
       {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
-      <div class="hero-meta"><span>{{ author_name }}</span><span>{{ featured.date | date: "%B %Y" }}</span><span>{{ read_mins }} min read</span></div>
+      <div class="hero-meta"><span>{{ author_name }}</span><span>{{ read_mins }} min read</span></div>
     </div>
   </div>
 
@@ -75,12 +75,6 @@
   <div class="tail">
     <div class="tail-inner">
       <div>
-        {% if featured.tags.size > 0 %}
-          <div class="tail-tags">
-            {% for tag in featured.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
-          </div>
-        {% endif %}
-
         {% assign featured_ts = featured.date | date: "%s" | plus: 0 %}
         {% assign older = nil %}
         {% assign newer = nil %}
