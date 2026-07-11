@@ -82,15 +82,13 @@ code, pre, kbd, .content .breadcrumb, #breadcrumb {
   border-right: 1px solid #0c1511;
 }
 
-/* Chirpy compiles #main-wrapper's margin-left from its own
-   $sidebar-width (260px / 300px at xxxl); match #sidebar's width
-   to those exact values so the two stay in sync instead of
-   overriding one side only. */
+/* Mockup's rail is a flat 304px at all desktop widths. Chirpy
+   compiles #main-wrapper's margin-left from its own $sidebar-width
+   (260px / 300px at xxxl) -- override that too so the two stay in
+   sync instead of the content column overlapping the rail. */
 @media (min-width: 850px) {
-  #sidebar { width: 260px; }
-}
-@media (min-width: 1650px) {
-  #sidebar { width: 300px; }
+  #sidebar { width: 304px; }
+  #main-wrapper { margin-left: 304px !important; }
 }
 
 #sidebar .wordmark {
@@ -133,7 +131,7 @@ code, pre, kbd, .content .breadcrumb, #breadcrumb {
 }
 #sidebar .statusblock b { font-weight: 500; color: var(--phosphor); }
 #sidebar .statusblock .row { display: flex; flex-wrap: nowrap; gap: 14px; }
-#sidebar .statusblock .k { width: 74px; flex: none; color: #5c6e64; }
+#sidebar .statusblock .k { width: 74px; flex: none; color: #5c6e64; white-space: nowrap; }
 #sidebar .statusblock .row > :last-child { min-width: 0; flex: 1 1 auto; }
 #sidebar .dot {
   display: inline-block;
