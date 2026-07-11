@@ -2,7 +2,7 @@
 layout: post
 title: "The Authorization Gap: What Entra ID Actually Controls When an AI Agent Acts on Behalf of a Human"
 date: 2026-06-29 12:00:00 +0530
-categories: [Machine Identity, Zero Trust]
+categories: [Microsoft Entra, Non-Human Identity]
 tags: [entra-id, ai-security, zero-trust, token-delegation, machine-identity]
 permalink: /posts/authorization-gap-entra-id-ai-agents/
 author: pankaj
