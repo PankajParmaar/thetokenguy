@@ -1,5 +1,5 @@
-title: In Production
-tagline: The working notes of an identity & infrastructure practitioner. Everything here ran somewhere real first.
+title: The Token Guy
+tagline: ""
 url: "https://thetokenguy.net"
 baseurl: ""
 lang: en-US
@@ -8,10 +8,10 @@ timezone: Asia/Kolkata
 # Author settings
 author:
   name: Pankaj Parmar
-  url: https://linkedin.com/in/thetokenguy
+  url: https://linkedin.com/in/pankajparmar
 avatar: /assets/img/avatar.jpg
 theme: jekyll-theme-chirpy
-theme_mode: light
+theme_mode: dark
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
