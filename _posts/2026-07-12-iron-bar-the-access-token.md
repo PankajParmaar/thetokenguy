@@ -2,7 +2,7 @@
 layout: post
 title: "Iron Bar — The Access Token"
 hero_title: "Iron Bar &mdash; The <em>Access Token</em>"
-date: 2026-07-12 00:00:00 +0530
+date: 2026-07-12 00:01:00 +0530
 categories: [Microsoft Entra, Core Identity]
 tags: [identity, access-tokens, history, jwt, zero-trust]
 author: pankaj

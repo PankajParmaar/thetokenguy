@@ -90,7 +90,6 @@
     {% assign author_name = site.data.authors[page.author].name | default: site.author.name %}
     <div class="article-meta">
       <span>{{ author_name }}</span>
-      <span>{{ page.date | date: "%B %Y" }}</span>
       <span>{{ read_mins }} min read</span>
     </div>
     <div class="article-body">
