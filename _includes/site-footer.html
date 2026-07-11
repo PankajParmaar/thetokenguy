@@ -1,0 +1,77 @@
+<!-- Shared footer -->
+{% assign entra = site.data.nav | where: "slug", "Microsoft Entra" | first %}
+
+<div class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="ps-block">
+        <div class="ps-pl"><span class="ps-p">PS &gt;</span><span class="ps-c">whoami</span></div>
+        <div class="ps-row"><span class="ps-k">Name</span><span class="ps-co">:</span><span class="ps-v">Pankaj Parmar</span></div>
+        <div class="ps-row"><span class="ps-k">Role</span><span class="ps-co">:</span><span class="ps-v">IAM &amp; Cloud Security</span></div>
+        <div class="ps-row"><span class="ps-k">Experience</span><span class="ps-co">:</span><span class="ps-v">15+ years</span></div>
+        <div class="ps-row"><span class="ps-k">Focus</span><span class="ps-co">:</span><span class="ps-v tl">Identity &middot; M365 &middot; Zero Trust</span></div>
+        <div class="ps-row"><span class="ps-k">This site</span><span class="ps-co">:</span><span class="ps-v">Lab notes and personal study<span class="ps-cur"></span></span></div>
+      </div>
+      <div class="ac">
+        <div class="av"><span class="av-i">PP</span><span class="av-l">photo</span></div>
+        <div class="at">
+          <div class="ah">About the Author</div>
+          <p class="ab">Father of two. Passionate about automobiles and long drives. When not in the lab breaking identity configurations, found on the road or spending time with his kids.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="fc-t">Microsoft Entra</div>
+      {% for item in entra.items %}
+        {% assign item_post = nil %}
+        {% for post in site.posts %}
+          {% if post.categories[0] == entra.slug and post.categories[1] == item %}
+            {% assign item_post = post %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if item_post %}
+          <a class="fl" href="{{ item_post.url | relative_url }}">{{ item }}</a>
+        {% else %}
+          <span class="fl">{{ item }}</span>
+        {% endif %}
+      {% endfor %}
+      {% assign fn_post = nil %}
+      {% for post in site.posts %}
+        {% if post.categories[0] == entra.slug and post.categories[1] == 'Field Notes' %}
+          {% assign fn_post = post %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% if fn_post %}
+        <a class="fl tl" href="{{ fn_post.url | relative_url }}">Field Notes</a>
+      {% else %}
+        <span class="fl tl">Field Notes</span>
+      {% endif %}
+    </div>
+    <div>
+      <div class="fc-t">More</div>
+      {% for tab in site.data.nav %}
+        {% unless tab.slug == "Microsoft Entra" %}
+          <span class="fl">{{ tab.title }}</span>
+        {% endunless %}
+      {% endfor %}
+    </div>
+    <div>
+      <div class="fc-t">Find me</div>
+      <a class="cl" href="{{ site.author.url }}" target="_blank" rel="noopener noreferrer"><div class="ci li">in</div><div><span class="clabel">LinkedIn</span><span class="chandle">/in/pankajparmar</span></div></a>
+      <a class="cl" href="https://x.com/thetokenguy" target="_blank" rel="noopener noreferrer"><div class="ci tw">&#120143;</div><div><span class="clabel">X / Twitter</span><span class="chandle">@thetokenguy</span></div></a>
+      <a class="cl" href="https://github.com/PankajParmar" target="_blank" rel="noopener noreferrer"><div class="ci gh">&#8997;</div><div><span class="clabel">GitHub</span><span class="chandle">PankajParmar</span></div></a>
+      <a class="cl" href="{{ '/contact/' | relative_url }}"><div class="ci em">@</div><div><span class="clabel">Email</span><span class="chandle">via contact page</span></div></a>
+      <div class="rss-b"><div class="rss-t">RSS Feed</div><p class="rss-d">No newsletter. No tracking. Know when something new lands.</p></div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span class="fcopy">&copy; {{ 'now' | date: "%Y" }} thetokenguy.net</span>
+    <div class="flinks">
+      <a href="{{ '/about/' | relative_url }}">About</a><span class="sep">&middot;</span>
+      <a href="{{ '/contact/' | relative_url }}">Contact</a><span class="sep">&middot;</span>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS &#8599;</a>
+    </div>
+  </div>
+</div>

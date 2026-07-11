@@ -1,0 +1,11 @@
+<!-- Mini header — compact wordmark + 6 nav tabs, used on docs/post pages -->
+{% assign active_tab = page.categories[0] %}
+
+<div class="mini-header">
+  <a class="mini-logo" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <div class="mini-nav">
+    {% for tab in site.data.nav %}
+      <span{% if tab.slug == active_tab %} class="active"{% endif %}>{{ tab.title }}</span>
+    {% endfor %}
+  </div>
+</div>

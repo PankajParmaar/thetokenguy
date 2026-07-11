@@ -1,191 +1,162 @@
 ---
-layout: default
 ---
-
 {% include lang.html %}
+<!doctype html>
+<html lang="{{ page.lang | default: site.alt_lang | default: site.lang }}" data-bs-theme="dark">
+{% include head.html lang=lang %}
+<body>
+<div class="tg">
 
-{% assign latest = site.posts.first %}
-{% assign rest = site.posts | slice: 1, 6 %}
-{% assign first_post = site.posts | last %}
-{% assign first_year = first_post.date | date: '%Y' %}
-{% assign last_year = latest.date | date: '%Y' %}
+{% include site-header-full.html %}
 
-{% assign known_types = "" | split: "," %}
-{% for post in site.posts %}
-  {% assign t = site.data.entry_types[post.slug] | default: 'design-note' %}
-  {% unless known_types contains t %}
-    {% assign known_types = known_types | push: t %}
-  {% endunless %}
-{% endfor %}
+{% assign featured = site.posts.first %}
 
-<section class="hero">
-  <p class="eyebrow">Field notes from production systems <em>&middot; written after the page, not before the launch</em></p>
-  <h1>The best documentation is written by the person <span class="u">who got paged.</span></h1>
-  <p class="dek">15+ years of building and operating identity infrastructure &mdash; directory sync that can't drift, conditional access that can't lock out the CEO, and the non-human identities nobody is watching.</p>
-</section>
-
-<section class="archive" aria-label="Archive timeline">
-  <div class="archive-head">
-    <span>Archive &middot; {% if first_year == last_year %}{{ first_year }}{% else %}{{ first_year }} &mdash; {{ last_year }}{% endif %} &middot; one tick per entry &middot; hover for detail</span>
-    <span class="legend">
-      {% for t in known_types %}
-        {% case t %}
-          {% when 'runbook' %}<span><i style="background:var(--brass)"></i>runbook</span>
-          {% when 'field-test' %}<span><i style="background:var(--green)"></i>field test</span>
-          {% else %}<span><i style="background:var(--slate)"></i>design note</span>
-        {% endcase %}
-      {% endfor %}
-    </span>
-  </div>
-  <div class="tickrail" id="tickrail"></div>
-  <div class="yearlabels" id="yearlabels"></div>
-</section>
-
-<script type="application/json" id="archive-data">
-[
-{% for post in site.posts %}
-  {% assign etype = site.data.entry_types[post.slug] | default: 'design-note' %}
-  {% case etype %}
-    {% when 'runbook' %}{% assign etype_class = 'runbook' %}{% assign etype_label = 'runbook' %}
-    {% when 'field-test' %}{% assign etype_class = 'field' %}{% assign etype_label = 'field test' %}
-    {% else %}{% assign etype_class = 'design' %}{% assign etype_label = 'design note' %}
-  {% endcase %}
-  {
-    "t": {{ post.date | date: '%s' }}000,
-    "type": "{{ etype_class }}",
-    "label": {{ etype_label | jsonify }},
-    "title": {{ post.title | jsonify }},
-    "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
-    "url": {{ post.url | relative_url | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-{% endfor %}
-]
-</script>
-
-<div id="tip" role="tooltip" aria-hidden="true"></div>
-
-<h2 class="sect" id="featured">Latest entry</h2>
-{% if latest %}
-  {% assign etype = site.data.entry_types[latest.slug] | default: 'design-note' %}
-  {% case etype %}
-    {% when 'runbook' %}{% assign etype_class = 'runbook' %}{% assign etype_label = 'Runbook' %}
-    {% when 'field-test' %}{% assign etype_class = 'field' %}{% assign etype_label = 'Field test' %}
-    {% else %}{% assign etype_class = 'design' %}{% assign etype_label = 'Design note' %}
-  {% endcase %}
-  {% assign words = latest.content | strip_html | number_of_words %}
+{% if featured %}
+  {% assign words = featured.content | strip_html | number_of_words %}
   {% assign read_mins = words | divided_by: 200 %}
   {% if read_mins < 1 %}{% assign read_mins = 1 %}{% endif %}
-  <article class="featured">
-    <div class="meta">
-      <span>{{ latest.date | date: "%Y-%m-%d" }}</span>
-      <span class="type {{ etype_class }}"><i></i>{{ etype_label }}</span>
-      <span>{{ read_mins }} min read</span>
+
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Featured Article &mdash; {{ featured.categories | join: " &middot; " }}</div>
+      <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
+      <p class="hero-deck">{{ featured.description }}</p>
+      {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
+      <div class="hero-meta"><span>{{ author_name }}</span><span>{{ featured.date | date: "%B %Y" }}</span><span>{{ read_mins }} min read</span></div>
     </div>
-    <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
-    <p class="abs">{{ latest.description }}</p>
-    <div class="factline">
-      <b>categories</b> &mdash; {{ latest.categories | join: ", " }}<br>
-      <b>tags</b> &mdash; {{ latest.tags | join: ", " }}
+  </div>
+
+  <div class="body-grid">
+    <article class="article">
+      {% include refactor-content.html content=featured.content lang=lang %}
+    </article>
+
+    <aside class="sidebar">
+      {% if featured.toc_items %}
+        <div style="margin-bottom:1.8rem">
+          <div class="sb-label">In this article</div>
+          {% for item in featured.toc_items %}
+            <div class="toc-item{% if forloop.first %} cur{% endif %}">{{ item }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% assign related = site.posts | where_exp: "p", "p.categories[0] == featured.categories[0]" | where_exp: "p", "p.url != featured.url" | slice: 0, 3 %}
+      {% if related.size > 0 %}
+        <div style="margin-bottom:1.8rem">
+          <div class="sb-label">Also in {{ featured.categories[0] }}</div>
+          {% for post in related %}
+            <a class="sb-item" href="{{ post.url | relative_url }}">
+              <div class="sb-title">{{ post.title }}</div>
+              <div class="sb-tag">{{ post.categories[1] }}</div>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% assign field_notes = site.posts | where_exp: "p", "p.categories[0] == featured.categories[0]" | where_exp: "p", "p.categories[1] == 'Field Notes'" %}
+      {% if field_notes.size > 0 %}
+        <div>
+          <div class="sb-label">Field Notes</div>
+          {% for post in field_notes limit: 3 %}
+            <a class="sb-item" href="{{ post.url | relative_url }}">
+              <div class="sb-title tl">{{ post.title }}</div>
+              <div class="sb-tag">{{ post.categories[0] }} &middot; Field Notes</div>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </aside>
+  </div>
+
+  <div class="tail">
+    <div class="tail-inner">
+      <div>
+        {% if featured.tags.size > 0 %}
+          <div class="tail-tags">
+            {% for tag in featured.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+          </div>
+        {% endif %}
+
+        {% assign featured_ts = featured.date | date: "%s" | plus: 0 %}
+        {% assign older = nil %}
+        {% assign newer = nil %}
+        {% assign sorted_posts = site.posts | sort: "date" %}
+        {% for p in sorted_posts %}
+          {% assign p_ts = p.date | date: "%s" | plus: 0 %}
+          {% if p_ts < featured_ts %}
+            {% assign older = p %}
+          {% elsif p_ts > featured_ts and newer == nil %}
+            {% assign newer = p %}
+          {% endif %}
+        {% endfor %}
+        {% if older or newer %}
+          <div class="tail-nav">
+            {% if older %}
+              <a class="tail-btn" href="{{ older.url | relative_url }}"><span>Previous</span>&larr; {{ older.title }}</a>
+            {% else %}<span></span>{% endif %}
+            {% if newer %}
+              <a class="tail-btn" style="text-align:right" href="{{ newer.url | relative_url }}"><span>Next</span>{{ newer.title }} &rarr;</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <div>
+        {% assign up_next = site.posts | where_exp: "p", "p.categories[1] == featured.categories[1]" | where_exp: "p", "p.url != featured.url" | slice: 0, 2 %}
+        {% if up_next.size > 0 %}
+          <div class="sb-label">Up next in {{ featured.categories[1] }}</div>
+          {% for post in up_next %}
+            <a class="sb-item" href="{{ post.url | relative_url }}">
+              <div class="sb-title">{{ post.title }}</div>
+              <div class="sb-tag">{{ post.categories[1] }}</div>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
-  </article>
+  </div>
 {% endif %}
 
-<h2 class="sect" id="entries">Recent entries</h2>
-<ul class="ledger">
-  {% for post in rest %}
-    {% assign etype = site.data.entry_types[post.slug] | default: 'design-note' %}
-    {% case etype %}
-      {% when 'runbook' %}{% assign etype_class = 'runbook' %}{% assign etype_label = 'Runbook' %}
-      {% when 'field-test' %}{% assign etype_class = 'field' %}{% assign etype_label = 'Field test' %}
-      {% else %}{% assign etype_class = 'design' %}{% assign etype_label = 'Design note' %}
-    {% endcase %}
-    <li class="entry">
-      <div class="when">{{ post.date | date: "%Y-%m-%d" }}<br><span class="type {{ etype_class }}"><i></i>{{ etype_label }}</span></div>
-      <div>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p>{{ post.description }}</p>
-      </div>
-      <span class="arrow">&rarr;</span>
-    </li>
-  {% endfor %}
-</ul>
-<a class="allentries" href="{{ '/archives/' | relative_url }}">browse all {{ site.posts.size }} {% if site.posts.size == 1 %}entry{% else %}entries{% endif %} &rarr;</a>
+{% include site-footer.html %}
 
-<h2 class="sect" id="about">About the operator</h2>
-<div class="about">
-  <div>
-    <p>Senior Technical Advisor and Identity Specialist with over 15 years of hands-on engineering experience across the Microsoft 365 enterprise ecosystem.</p>
-    <p>Core focus areas include Entra ID governance, enterprise hybrid identity synchronization topologies, robust Conditional Access design architecture, and zero-trust perimeter containment boundaries. Read the full <a href="{{ '/about/' | relative_url }}">about page</a>.</p>
-  </div>
-  <div class="colophon">
-    <span class="h">Colophon</span>
-    jekyll + chirpy {{ site.theme }}<br>
-    served from github pages<br>
-    no analytics &middot; no cookies<br>
-    type: ibm plex serif / sans / mono<br>
-    rss is the api &middot; posts are markdown<br>
-    uptime: better than most things i've operated
-  </div>
 </div>
 
-<footer class="page">
-  <span>&copy; {% if first_year == last_year %}{{ first_year }}{% else %}{{ first_year }}&ndash;{{ last_year }}{% endif %} &middot; in production</span>
-  <span>if you can read this, the deploy worked</span>
-</footer>
-
 <script>
-  (function () {
-    var raw = document.getElementById('archive-data');
-    var entries = JSON.parse(raw.textContent);
-    var rail = document.getElementById('tickrail');
-    var yearlabels = document.getElementById('yearlabels');
-    var tip = document.getElementById('tip');
-    if (!entries.length) return;
-
-    var ts = entries.map(function (e) { return e.t; });
-    var START = Math.min.apply(null, ts);
-    var END = Math.max.apply(null, ts);
-    var span = END - START;
-
-    var startYear = new Date(START).getFullYear();
-    var endYear = new Date(END).getFullYear();
-    for (var y = startYear; y <= endYear; y++) {
-      var span_el = document.createElement('span');
-      span_el.textContent = y;
-      yearlabels.appendChild(span_el);
+(function () {
+  var c = document.getElementById('hero-canvas');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  c.width = c.offsetWidth; c.height = c.offsetHeight;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pts = Array.from({length: 55}, function () {
+    return {
+      x: Math.random() * c.width, y: Math.random() * c.height,
+      r: Math.random() * 1.2 + 0.3, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .15,
+      a: Math.random() * .5 + .2, p: Math.random() * Math.PI * 2,
+      hue: Math.random() > 0.6 ? 'teal' : 'blue'
+    };
+  });
+  function draw() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i]; p.x += p.vx; p.y += p.vy; p.p += .014;
+      if (p.x < 0) p.x = c.width; if (p.x > c.width) p.x = 0;
+      if (p.y < 0) p.y = c.height; if (p.y > c.height) p.y = 0;
+      for (var j = i + 1; j < pts.length; j++) {
+        var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 100) { ctx.beginPath(); ctx.strokeStyle = 'rgba(90,120,200,' + ((1 - d / 100) * .12) + ')'; ctx.lineWidth = .5; ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+      }
+      var a = p.a * (.65 + .35 * Math.sin(p.p));
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.hue === 'teal' ? 'rgba(45,212,191,' + a + ')' : 'rgba(100,140,220,' + a + ')'; ctx.fill();
     }
-
-    entries.forEach(function (e, i) {
-      var pct = span > 0 ? ((e.t - START) / span) * 100 : (entries.length > 1 ? (i / (entries.length - 1)) * 100 : 50);
-      var b = document.createElement('button');
-      b.className = 'tick t-' + e.type;
-      b.style.left = 'calc(' + pct.toFixed(3) + '% - 2px)';
-      b.setAttribute('aria-label', e.date + ' — ' + e.label + ' — ' + e.title);
-      b.addEventListener('mouseenter', function (ev) { showTip(ev, e); });
-      b.addEventListener('focus', function (ev) { showTip(ev, e); });
-      b.addEventListener('mouseleave', hideTip);
-      b.addEventListener('blur', hideTip);
-      b.addEventListener('click', function () { window.location.href = e.url; });
-      rail.appendChild(b);
-    });
-
-    function showTip(ev, e) {
-      tip.innerHTML = '<span class="tt">' + e.date + ' &middot; ' + e.label + '</span><br>' + e.title;
-      tip.classList.add('on');
-      tip.setAttribute('aria-hidden', 'false');
-      positionTip(ev.target);
-    }
-    function positionTip(el) {
-      var r = el.getBoundingClientRect();
-      var tw = tip.offsetWidth;
-      var x = r.left + r.width / 2 - tw / 2;
-      x = Math.max(12, Math.min(x, window.innerWidth - tw - 12));
-      tip.style.left = x + 'px';
-      tip.style.top = (r.top - tip.offsetHeight - 10) + 'px';
-    }
-    function hideTip() {
-      tip.classList.remove('on');
-      tip.setAttribute('aria-hidden', 'true');
-    }
-  })();
+    if (!reduceMotion) requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
+</body>
+</html>

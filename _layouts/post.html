@@ -1,0 +1,129 @@
+---
+---
+{% include lang.html %}
+<!doctype html>
+<html lang="{{ page.lang | default: site.alt_lang | default: site.lang }}" data-bs-theme="dark">
+{% include head.html lang=lang %}
+<body>
+<div class="tg">
+
+{% include site-header-mini.html %}
+
+{% assign tab_slug = page.categories[0] %}
+{% assign sub_slug = page.categories[1] %}
+{% assign tab = site.data.nav | where: "slug", tab_slug | first %}
+
+<div class="section-bar">
+  <a class="breadcrumb-root" href="{{ '/' | relative_url }}">Home</a>
+  {% if tab_slug %}
+    <span class="breadcrumb-sep">&rsaquo;</span>
+    <span class="breadcrumb-section">{{ tab_slug }}</span>
+  {% endif %}
+  {% if sub_slug %}
+    <span class="breadcrumb-sep">&rsaquo;</span>
+    <span class="breadcrumb-current">{{ sub_slug }}</span>
+  {% endif %}
+</div>
+
+{% if tab %}
+  <div class="section-tabs">
+    {% for item in tab.items %}
+      {% if item == sub_slug %}
+        <div class="section-tab active">{{ item }}</div>
+      {% else %}
+        {% assign item_post = nil %}
+        {% for post in site.posts %}
+          {% if post.categories[0] == tab_slug and post.categories[1] == item %}
+            {% assign item_post = post %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if item_post %}
+          <a class="section-tab" href="{{ item_post.url | relative_url }}">{{ item }}</a>
+        {% else %}
+          <div class="section-tab">{{ item }}</div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign fn_post = nil %}
+    {% for post in site.posts %}
+      {% if post.categories[0] == tab_slug and post.categories[1] == 'Field Notes' %}
+        {% assign fn_post = post %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {% if fn_post %}
+      <a class="section-tab" style="color:#2DD4BF" href="{{ fn_post.url | relative_url }}">Field Notes</a>
+    {% else %}
+      <div class="section-tab" style="color:#2DD4BF">Field Notes</div>
+    {% endif %}
+  </div>
+{% endif %}
+
+<div class="docs-layout">
+  <div class="docs-leftnav">
+    <div class="leftnav-section-title">{{ sub_slug }}</div>
+    {% assign siblings = site.posts | where_exp: "p", "p.categories[0] == tab_slug" | where_exp: "p", "p.categories[1] == sub_slug" | sort: "date" %}
+    {% for post in siblings %}
+      <a class="leftnav-item{% if post.url == page.url %} active{% endif %}" href="{{ post.url | relative_url }}">
+        <span class="leftnav-item-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        <span class="leftnav-item-text">{{ post.title }}</span>
+      </a>
+    {% endfor %}
+
+    {% assign fn_siblings = site.posts | where_exp: "p", "p.categories[0] == tab_slug" | where_exp: "p", "p.categories[1] == 'Field Notes'" %}
+    {% if fn_siblings.size > 0 %}
+      <div class="leftnav-divider"></div>
+      <a class="leftnav-fieldnotes" href="{{ fn_siblings.first.url | relative_url }}">
+        <span class="leftnav-fieldnotes-label">Field Notes</span>
+        <span class="leftnav-fieldnotes-count">{{ fn_siblings.size }}</span>
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="docs-content">
+    <div class="article-eyebrow">{{ page.categories | join: " &middot; " }}</div>
+    <h1 class="article-title">{{ page.title }}</h1>
+    {% assign words = content | strip_html | number_of_words %}
+    {% assign read_mins = words | divided_by: 200 %}
+    {% if read_mins < 1 %}{% assign read_mins = 1 %}{% endif %}
+    {% assign author_name = site.data.authors[page.author].name | default: site.author.name %}
+    <div class="article-meta">
+      <span>{{ author_name }}</span>
+      <span>{{ page.date | date: "%B %Y" }}</span>
+      <span>{{ read_mins }} min read</span>
+    </div>
+    <div class="article-body">
+      {% include refactor-content.html content=content lang=lang %}
+    </div>
+
+    {% assign page_ts = page.date | date: "%s" | plus: 0 %}
+    {% assign older = nil %}
+    {% assign newer = nil %}
+    {% assign sorted_posts = site.posts | sort: "date" %}
+    {% for p in sorted_posts %}
+      {% assign p_ts = p.date | date: "%s" | plus: 0 %}
+      {% if p_ts < page_ts %}
+        {% assign older = p %}
+      {% elsif p_ts > page_ts and newer == nil %}
+        {% assign newer = p %}
+      {% endif %}
+    {% endfor %}
+    {% if older or newer %}
+      <div class="article-nav-bottom">
+        {% if older %}
+          <a class="article-nav-btn" href="{{ older.url | relative_url }}"><span>Previous</span>&larr; {{ older.title }}</a>
+        {% else %}<span></span>{% endif %}
+        {% if newer %}
+          <a class="article-nav-btn" style="text-align:right" href="{{ newer.url | relative_url }}"><span>Next</span>{{ newer.title }} &rarr;</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% include site-footer.html %}
+
+</div>
+</body>
+</html>

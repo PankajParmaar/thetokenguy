@@ -1,0 +1,54 @@
+# The six top-level tabs and their sub-sections, per the locked nav spec.
+# "slug" is used to match against post categories ([tab, subsection]).
+- title: Microsoft Entra
+  slug: Microsoft Entra
+  items:
+    - Core Identity
+    - Authentication
+    - Conditional Access
+    - Hybrid Identity
+    - Privileged Access
+    - Non-Human Identity
+    - Governance
+- title: Microsoft 365
+  slug: Microsoft 365
+  items:
+    - Tenant Administration
+    - Exchange Online
+    - Teams & Collaboration
+    - SharePoint & OneDrive
+    - Compliance & Data Protection
+    - Endpoint Management
+- title: Microsoft Defender
+  slug: Microsoft Defender
+  items:
+    - Threat Protection
+    - Cloud App Security
+    - Vulnerability Management
+    - Identity Defence
+    - SIEM & Sentinel
+    - Incident Response
+- title: PowerShell & Graph
+  slug: PowerShell & Graph
+  items:
+    - Scripting Foundations
+    - Identity Automation
+    - Security Automation
+    - Reporting & Auditing
+    - Graph API
+- title: Zero Trust
+  slug: Zero Trust
+  items:
+    - Principles & Architecture
+    - Identity as the Perimeter
+    - Device & Endpoint Trust
+    - Network Access Control
+    - Data Protection
+- title: AI & Identity
+  slug: AI & Identity
+  items:
+    - AI Agents & Access
+    - Non-Human Governance
+    - Copilot Security
+    - Prompt & Token Risk
+    - Identity in AI Pipelines
