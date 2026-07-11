@@ -1,0 +1,190 @@
+---
+layout: default
+---
+
+{% include lang.html %}
+
+{% assign latest = site.posts.first %}
+{% assign rest = site.posts | slice: 1, 6 %}
+{% assign first_post = site.posts | last %}
+{% assign first_year = first_post.date | date: '%Y' %}
+{% assign last_year = latest.date | date: '%Y' %}
+
+{% assign known_types = "" | split: "," %}
+{% for post in site.posts %}
+  {% assign t = site.data.entry_types[post.slug] | default: 'design-note' %}
+  {% unless known_types contains t %}
+    {% assign known_types = known_types | push: t %}
+  {% endunless %}
+{% endfor %}
+
+<section class="hero">
+  <p class="eyebrow">Field notes from production identity systems <em>&middot; written after the incident, not before the launch</em></p>
+  <h1>The best documentation is written by the person <span class="u">who got paged.</span></h1>
+  <p class="dek">{{ site.tagline }}. Every entry here maps to a real post in this archive &mdash; no placeholder copy, no invented incidents.</p>
+</section>
+
+<section class="archive" aria-label="Archive timeline">
+  <div class="archive-head">
+    <span>Archive &middot; {% if first_year == last_year %}{{ first_year }}{% else %}{{ first_year }} &mdash; {{ last_year }}{% endif %} &middot; one tick per entry &middot; hover for detail</span>
+    <span class="legend">
+      {% for t in known_types %}
+        {% case t %}
+          {% when 'runbook' %}<span><i style="background:var(--brass)"></i>runbook</span>
+          {% when 'field-test' %}<span><i style="background:var(--green)"></i>field test</span>
+          {% else %}<span><i style="background:var(--slate)"></i>design note</span>
+        {% endcase %}
+      {% endfor %}
+    </span>
+  </div>
+  <div class="tickrail" id="tickrail"></div>
+  <div class="yearlabels" id="yearlabels"></div>
+</section>
+
+<script type="application/json" id="archive-data">
+[
+{% for post in site.posts %}
+  {% assign etype = site.data.entry_types[post.slug] | default: 'design-note' %}
+  {% case etype %}
+    {% when 'runbook' %}{% assign etype_class = 'runbook' %}{% assign etype_label = 'runbook' %}
+    {% when 'field-test' %}{% assign etype_class = 'field' %}{% assign etype_label = 'field test' %}
+    {% else %}{% assign etype_class = 'design' %}{% assign etype_label = 'design note' %}
+  {% endcase %}
+  {
+    "t": {{ post.date | date: '%s' }}000,
+    "type": "{{ etype_class }}",
+    "label": {{ etype_label | jsonify }},
+    "title": {{ post.title | jsonify }},
+    "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+</script>
+
+<div id="tip" role="tooltip" aria-hidden="true"></div>
+
+<h2 class="sect" id="featured">Latest entry</h2>
+{% if latest %}
+  {% assign etype = site.data.entry_types[latest.slug] | default: 'design-note' %}
+  {% case etype %}
+    {% when 'runbook' %}{% assign etype_class = 'runbook' %}{% assign etype_label = 'Runbook' %}
+    {% when 'field-test' %}{% assign etype_class = 'field' %}{% assign etype_label = 'Field test' %}
+    {% else %}{% assign etype_class = 'design' %}{% assign etype_label = 'Design note' %}
+  {% endcase %}
+  {% assign words = latest.content | strip_html | number_of_words %}
+  {% assign read_mins = words | divided_by: 200 %}
+  {% if read_mins < 1 %}{% assign read_mins = 1 %}{% endif %}
+  <article class="featured">
+    <div class="meta">
+      <span>{{ latest.date | date: "%Y-%m-%d" }}</span>
+      <span class="type {{ etype_class }}"><i></i>{{ etype_label }}</span>
+      <span>{{ read_mins }} min read</span>
+    </div>
+    <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
+    <p class="abs">{{ latest.description }}</p>
+    <div class="factline">
+      <b>categories</b> &mdash; {{ latest.categories | join: ", " }}<br>
+      <b>tags</b> &mdash; {{ latest.tags | join: ", " }}
+    </div>
+  </article>
+{% endif %}
+
+<h2 class="sect" id="entries">Recent entries</h2>
+<ul class="ledger">
+  {% for post in rest %}
+    {% assign etype = site.data.entry_types[post.slug] | default: 'design-note' %}
+    {% case etype %}
+      {% when 'runbook' %}{% assign etype_class = 'runbook' %}{% assign etype_label = 'Runbook' %}
+      {% when 'field-test' %}{% assign etype_class = 'field' %}{% assign etype_label = 'Field test' %}
+      {% else %}{% assign etype_class = 'design' %}{% assign etype_label = 'Design note' %}
+    {% endcase %}
+    <li class="entry">
+      <div class="when">{{ post.date | date: "%Y-%m-%d" }}<br><span class="type {{ etype_class }}"><i></i>{{ etype_label }}</span></div>
+      <div>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.description }}</p>
+      </div>
+      <span class="arrow">&rarr;</span>
+    </li>
+  {% endfor %}
+</ul>
+<a class="allentries" href="{{ '/archives/' | relative_url }}">browse all {{ site.posts.size }} entries &rarr;</a>
+
+<h2 class="sect" id="about">About the operator</h2>
+<div class="about">
+  <div>
+    <p>Senior Technical Advisor and Identity Specialist with over 15 years of hands-on engineering experience across the Microsoft 365 enterprise ecosystem.</p>
+    <p>Core focus areas include Entra ID governance, enterprise hybrid identity synchronization topologies, robust Conditional Access design architecture, and zero-trust perimeter containment boundaries. Read the full <a href="{{ '/about/' | relative_url }}">about page</a>.</p>
+  </div>
+  <div class="colophon">
+    <span class="h">Colophon</span>
+    jekyll + chirpy {{ site.theme }}<br>
+    served from github pages<br>
+    no analytics &middot; no cookies<br>
+    type: ibm plex serif / sans / mono<br>
+    rss is the api &middot; posts are markdown
+  </div>
+</div>
+
+<footer class="page">
+  <span>&copy; {% if first_year == last_year %}{{ first_year }}{% else %}{{ first_year }}&ndash;{{ last_year }}{% endif %} &middot; in production</span>
+  <span>if you can read this, the deploy worked</span>
+</footer>
+
+<script>
+  (function () {
+    var raw = document.getElementById('archive-data');
+    var entries = JSON.parse(raw.textContent);
+    var rail = document.getElementById('tickrail');
+    var yearlabels = document.getElementById('yearlabels');
+    var tip = document.getElementById('tip');
+    if (!entries.length) return;
+
+    var ts = entries.map(function (e) { return e.t; });
+    var START = Math.min.apply(null, ts);
+    var END = Math.max.apply(null, ts);
+    var span = END - START;
+
+    var startYear = new Date(START).getFullYear();
+    var endYear = new Date(END).getFullYear();
+    for (var y = startYear; y <= endYear; y++) {
+      var span_el = document.createElement('span');
+      span_el.textContent = y;
+      yearlabels.appendChild(span_el);
+    }
+
+    entries.forEach(function (e, i) {
+      var pct = span > 0 ? ((e.t - START) / span) * 100 : (entries.length > 1 ? (i / (entries.length - 1)) * 100 : 50);
+      var b = document.createElement('button');
+      b.className = 'tick t-' + e.type;
+      b.style.left = 'calc(' + pct.toFixed(3) + '% - 2px)';
+      b.setAttribute('aria-label', e.date + ' — ' + e.label + ' — ' + e.title);
+      b.addEventListener('mouseenter', function (ev) { showTip(ev, e); });
+      b.addEventListener('focus', function (ev) { showTip(ev, e); });
+      b.addEventListener('mouseleave', hideTip);
+      b.addEventListener('blur', hideTip);
+      b.addEventListener('click', function () { window.location.href = e.url; });
+      rail.appendChild(b);
+    });
+
+    function showTip(ev, e) {
+      tip.innerHTML = '<span class="tt">' + e.date + ' &middot; ' + e.label + '</span><br>' + e.title;
+      tip.classList.add('on');
+      tip.setAttribute('aria-hidden', 'false');
+      positionTip(ev.target);
+    }
+    function positionTip(el) {
+      var r = el.getBoundingClientRect();
+      var tw = tip.offsetWidth;
+      var x = r.left + r.width / 2 - tw / 2;
+      x = Math.max(12, Math.min(x, window.innerWidth - tw - 12));
+      tip.style.left = x + 'px';
+      tip.style.top = (r.top - tip.offsetHeight - 10) + 'px';
+    }
+    function hideTip() {
+      tip.classList.remove('on');
+      tip.setAttribute('aria-hidden', 'true');
+    }
+  })();
+</script>
