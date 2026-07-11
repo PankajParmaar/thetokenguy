@@ -1,5 +1,5 @@
-title: IDAM.CORE
-tagline: Identity & Cloud Security Practitioner
+title: In Production
+tagline: Field notes from production identity systems
 url: "https://thetokenguy.net"
 baseurl: ""
 lang: en-US
@@ -11,8 +11,27 @@ author:
   url: https://linkedin.com/in/thetokenguy
 avatar: /assets/img/avatar.jpg
 theme: jekyll-theme-chirpy
+theme_mode: light
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
 paginate: 10
 paginate_path: "/page:num"
+permalink: /posts/:title/
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      permalink: /posts/:title/
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      permalink: /:title/
