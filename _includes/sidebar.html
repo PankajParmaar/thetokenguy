@@ -1,0 +1,50 @@
+<!-- The Side Bar : "console rail" -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column">
+  <a href="{{ '/' | relative_url }}" class="wordmark">{{ site.title }}<span class="cursor" aria-hidden="true"></span></a>
+  <p class="rail-tag">{{ site.tagline }}</p>
+
+  <div class="statusblock" role="status" aria-label="Site status">
+    <div class="row"><span class="k">author</span><span>{{ site.author.name }}</span></div>
+    <div class="row"><span class="k">entries</span><span>{{ site.posts.size }} published</span></div>
+    <div class="row"><span class="k">status</span><b><span class="dot"></span>operational</b></div>
+    <div class="row"><span class="k">local</span><b id="rail-clock">--:--:-- IST</b></div>
+  </div>
+
+  <nav class="rail-nav flex-grow-1" aria-label="Site">
+    <a href="{{ '/' | relative_url }}"{% if page.layout == 'home' %} class="active"{% endif %}>
+      Home <span class="n">{{ site.posts.size }}</span>
+    </a>
+    {% for tab in site.tabs %}
+      {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+      <a href="{{ tab.url | relative_url }}"{% if tab.url == page.url %} class="active"{% endif %}>
+        {{ site.data.locales[include.lang].tabs[tab_name] | default: tab.title }}
+        {% if tab_name == 'tags' %}<span class="n">{{ site.tags.size }}</span>{% endif %}
+        {% if tab_name == 'categories' %}<span class="n">{{ site.categories.size }}</span>{% endif %}
+      </a>
+    {% endfor %}
+    <a href="{{ '/feed.xml' | relative_url }}">RSS <span class="n">the api</span></a>
+  </nav>
+
+  <div class="rail-foot">
+    no trackers &middot; no sponsors &middot; no paywall<br>
+    just notes from the field<br>
+    <a href="{{ '/about/' | relative_url }}">colophon &darr;</a>
+  </div>
+</aside>
+<!-- #sidebar -->
+
+<script>
+  (function () {
+    var clock = document.getElementById('rail-clock');
+    if (!clock) return;
+    function tick() {
+      clock.textContent = new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false, timeZone: 'Asia/Kolkata'
+      }).format(new Date()) + ' IST';
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>

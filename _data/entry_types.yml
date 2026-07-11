@@ -1,0 +1,18 @@
+# Maps each post's slug (filename minus date prefix/extension) to an
+# entry type used by the archive tick-bar, meta badges, and type coloring.
+#
+# No post here is genuinely a real-incident postmortem, so "incident" is
+# not used yet -- the design still supports it for a future post that is one.
+# Any post not listed here falls back to "design-note" (see home.html).
+#
+# design-note  - conceptual / architectural / strategic writing
+# runbook      - has a concrete, repeatable procedure or script
+# field-test   - hands-on remediation or measurement against a real technique
+app-registration-secret-sprawl: design-note
+authorization-gap-entra-id-ai-agents: design-note
+ciso-advisory-identity-playbook: design-note
+ciso-advisory-incident-response: runbook
+conditional-access-audit: runbook
+session-hijacking-infostealer: field-test
+strategic-horizon-roadmap: design-note
+tenant-diagnostics-automation: runbook
