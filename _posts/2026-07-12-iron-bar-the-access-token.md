@@ -3,7 +3,7 @@ layout: post
 title: "Iron Bar — The Access Token"
 hero_title: "Iron Bar &mdash; The <em>Access Token</em>"
 date: 2026-07-12 00:01:00 +0530
-categories: [Microsoft Entra, Core Identity]
+categories: [homepage]
 tags: [identity, access-tokens, history, jwt, zero-trust]
 author: pankaj
 description: "Sometime around the ninth century, if you couldn't prove who you were — a church official would hand you a bar of iron that had been sitting in a fire. This is where identity begins."
