@@ -24,7 +24,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">Featured Article &mdash; {{ featured.categories | join: " &middot; " }}</div>
       <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
-      <p class="hero-deck">{{ featured.description }}</p>
+      <p class="hero-deck">Face. Name. Wax seal. Passport. Smart card. JWT. Six hundred years of credential evolution — and someone is still finding a way through.</p>
       {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
       <div class="hero-meta"><span>{{ author_name }}</span><span>{{ read_mins }} min read</span></div>
     </div>
