@@ -94,12 +94,12 @@ a.dd-item, a.tab { cursor: pointer; }
 .article p strong { color: #C8D0F0; }
 .drop-cap {
   font-family: 'Playfair Display', serif;
-  font-size: 5.5em;
+  font-size: 6.5em;
   font-weight: 700;
   float: left;
   line-height: 0.8;
   margin-right: 0.08em;
-  margin-top: -0.15em;
+  margin-top: -0.567em;
   color: #C9A84C;
 }
 .article h1, .article h2, .article h3 { font-family: 'IBM Plex Serif', serif; font-weight: 600; color: #C8CCDE; margin: 1.8rem 0 0.9rem; line-height: 1.3; }
