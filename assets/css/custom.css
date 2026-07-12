@@ -75,7 +75,7 @@ body { background: #080C14; font-size: 16px; color: #C8D0E8; }
 a.dd-item, a.tab { cursor: pointer; }
 
 /* ============ HERO (home only) ============ */
-.hero { position: relative; height: 340px; overflow: hidden; display: flex; align-items: center; padding: 0 2.5rem; background: #080C14; }
+.hero { position: relative; z-index: 0; height: 340px; overflow: hidden; display: flex; align-items: center; padding: 0 2.5rem; background: #080C14; }
 .hero-glow { position: absolute; top: -80px; left: -60px; width: 500px; height: 400px; background: radial-gradient(ellipse,rgba(60,80,180,0.12) 0%,transparent 70%); pointer-events: none; z-index: 1; }
 .hero-glow2 { position: absolute; bottom: -60px; right: -40px; width: 400px; height: 300px; background: radial-gradient(ellipse,rgba(40,160,180,0.07) 0%,transparent 70%); pointer-events: none; z-index: 1; }
 #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
@@ -87,7 +87,7 @@ a.dd-item, a.tab { cursor: pointer; }
 .hero-meta { margin-top: 18px; display: flex; gap: 16px; font-size: 11px; color: #3A4A6A; }
 
 /* ============ BODY (home) ============ */
-.body-grid { display: grid; grid-template-columns: 1fr 240px; position: relative; }
+.body-grid { display: grid; grid-template-columns: 1fr 240px; position: relative; z-index: 1; }
 .article { padding: 2.5rem 2.5rem 2rem; border-right: 1px solid #111828; background: #0D1018; }
 
 .article p { font-family: 'IBM Plex Serif', serif; font-size: 16.5px; line-height: 1.9; color: #A8B4CC; margin-bottom: 1.4rem; }
