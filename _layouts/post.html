@@ -60,7 +60,8 @@
   </div>
 {% endif %}
 
-<div class="docs-layout">
+<div class="docs-layout{% if page.hidden %} docs-layout--full{% endif %}">
+  {% unless page.hidden %}
   <div class="docs-leftnav">
     <div class="leftnav-section-title">{{ sub_slug }}</div>
     {% assign siblings = site.posts | where_exp: "p", "p.categories[0] == tab_slug" | where_exp: "p", "p.categories[1] == sub_slug" | sort: "date" %}
@@ -80,6 +81,7 @@
       </a>
     {% endif %}
   </div>
+  {% endunless %}
 
   <div class="docs-content">
     <div class="article-eyebrow">{{ page.categories | join: " &middot; " }}</div>
