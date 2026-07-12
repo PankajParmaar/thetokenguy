@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Core Identity"]
 tags: ["microsoft entra", "azure", "tenant", "subscription", "management groups", "azure architecture", "powershell"]
 author: pankaj
 ---
-# Understanding Tenants, Subscriptions, and Management Groups
 
 If you've spent time in both the Microsoft Entra admin center and the Azure portal, you've probably noticed something confusing: sometimes you're managing users, sometimes you're managing virtual machines, sometimes you're assigning RBAC roles, sometimes you're creating Conditional Access policies, and yet everything appears to belong to the same organization. The reason is that Microsoft is really running two separate hierarchies in parallel — an identity hierarchy in Microsoft Entra and a resource hierarchy in Azure Resource Manager. Once you understand where each one begins and ends, a lot of Azure concepts stop feeling disconnected from each other.
 

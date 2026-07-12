@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Non-Human Identity"]
 tags: ["microsoft entra", "managed identity", "service principal", "workload identity", "azure", "powershell"]
 author: pankaj
 ---
-# Service Principals vs Managed Identities: The Identity Problem Most Architects Meet Too Late
 
 Most identity teams spend years tightening MFA policies, Conditional Access rules, and privileged access workflows for people while an entirely different identity estate grows almost unnoticed. Azure Functions deploy infrastructure. AKS workloads authenticate to Azure resources. Logic Apps call Microsoft Graph. Automation accounts modify subscriptions overnight. GitHub Actions publish production code. Terraform pipelines build and destroy environments without a human touching the keyboard. None of those workloads care whether it's three in the afternoon or three in the morning — they authenticate, request tokens, and make privileged API calls exactly as they were designed to.
 

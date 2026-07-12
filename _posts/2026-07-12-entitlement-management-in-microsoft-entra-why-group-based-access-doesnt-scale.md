@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Governance"]
 tags: ["microsoft entra", "identity governance", "entitlement management", "access packages", "access reviews", "zero trust"]
 author: pankaj
 ---
-# Entitlement Management in Microsoft Entra: Why Group-Based Access Doesn't Scale
 
 Identity debt rarely begins with privileged roles or forgotten administrator accounts. It begins with ordinary access requests. A new engineer joins a project, a ticket reaches the infrastructure team, and access is assembled from whatever authorization components already exist. Membership is added to several security groups, an Azure RBAC role is assigned for deployment activities, an application role grants API access, and perhaps a Microsoft 365 Group unlocks collaboration resources. The request is completed within minutes, production remains stable, and the directory accurately records every assignment. Six months later, the engineering context has disappeared. The project has evolved, ownership has changed, and the approval record lives in a closed service ticket, while Microsoft Entra retains only the authorization state. The directory knows precisely what the identity can access, but it has no native understanding of why those permissions still exist.
 

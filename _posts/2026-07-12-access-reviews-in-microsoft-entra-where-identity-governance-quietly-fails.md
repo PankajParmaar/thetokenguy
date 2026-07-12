@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Governance"]
 tags: ["microsoft entra", "identity governance", "access reviews", "microsoft graph", "zero trust"]
 author: pankaj
 ---
-# Access Reviews in Microsoft Entra: Where Identity Governance Quietly Fails
 
 Large-scale identity environments frequently expose a structural reality: Access Reviews lose their efficacy not because reviewers are careless, but because the review process scales past the limit of human cognitive capacity. Monday morning arrives, Outlook fills with campaign notifications, and department managers face the task of validating hundreds of identities mapped to security groups they did not create, Microsoft 365 Groups they do not own, application roles they have never encountered, and nested Active Directory groups synchronized years earlier through Entra Connect. The path of least operational resistance becomes the blanket approval. After several cycles, the campaign shifts from an active security control into administrative theatre — the directory records a completed review, compliance dashboards reflect a green status, and the underlying permissions remain completely unvalidated against actual business intent.
 

@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Hybrid Identity"]
 tags: ["microsoft entra", "entra connect", "cloud sync", "hybrid identity", "provisioning agent", "microsoft graph", "powershell"]
 author: pankaj
 ---
-# Microsoft Entra Connect vs Cloud Sync: Same Destination, Different Trade-offs
 
 One of the fastest ways to derail a hybrid identity discussion is to ask whether an organization should use Microsoft Entra Connect or Cloud Sync. The question sounds architectural, but most of the time it's operational. Both synchronize identities into Microsoft Entra, both support production workloads, and both keep users, groups, and selected attributes aligned between Active Directory and the cloud — that's where the similarity largely ends. The interesting difference isn't where objects end up, it's where synchronization logic executes, what infrastructure you own, and which capabilities you're willing to trade for operational simplicity.
 

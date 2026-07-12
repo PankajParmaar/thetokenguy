@@ -1,0 +1,27 @@
+<!-- Band 2 — top nav tabs with hover dropdowns, shared across homepage and post/docs pages -->
+{% assign active_tab = page.categories[0] | default: site.posts.first.categories[0] %}
+
+<div class="band2">
+  {% for tab in site.data.nav %}
+    <div class="tab{% if tab.slug == active_tab %} active{% endif %}">{{ tab.title }} <span class="tab-arrow">&#9662;</span>
+      <div class="dropdown">
+        {% for item in tab.items %}
+          {% assign item_siblings = site.posts | where_exp: "p", "p.categories[0] == tab.slug" | where_exp: "p", "p.categories[1] == item" | sort: "date" %}
+          {% assign item_post = item_siblings.first %}
+          {% if item_post %}
+            <a class="dd-item" href="{{ item_post.url | relative_url }}">{{ item }}</a>
+          {% else %}
+            <div class="dd-item">{{ item }}</div>
+          {% endif %}
+        {% endfor %}
+        {% assign fn_siblings = site.posts | where_exp: "p", "p.categories[0] == tab.slug" | where_exp: "p", "p.categories[1] == 'Field Notes'" | sort: "date" %}
+        {% assign fn_post = fn_siblings.first %}
+        {% if fn_post %}
+          <a class="dd-item fn" href="{{ fn_post.url | relative_url }}">Field Notes</a>
+        {% else %}
+          <div class="dd-item fn">Field Notes</div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

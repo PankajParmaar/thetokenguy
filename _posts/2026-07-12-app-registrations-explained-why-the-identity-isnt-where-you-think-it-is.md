@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Non-Human Identity"]
 tags: ["microsoft entra", "app registrations", "service principals", "oauth", "microsoft graph", "workload identity", "powershell"]
 author: pankaj
 ---
-# App Registrations Explained: Why the Identity Isn't Where You Think It Is
 
 One of the most expensive mistakes during an identity incident is assuming the object that created an application is the same object currently authenticating. A Microsoft Graph integration starts returning `403 Forbidden`, an Azure Automation runbook suddenly loses access to Key Vault, or a deployment pipeline that has worked for months begins failing after a customer onboards a new tenant. The investigation immediately heads to App registrations, because that's the blade the engineer opened the day they set up the integration and clicked "New registration." Meanwhile the object actually making authorization decisions — the tenant's Service Principal — never gets opened, and thirty minutes disappear comparing App IDs, Object IDs, and Enterprise Applications while the outage continues.
 

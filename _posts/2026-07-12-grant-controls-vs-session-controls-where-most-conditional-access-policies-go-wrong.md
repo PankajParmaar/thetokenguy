@@ -6,7 +6,6 @@ categories: ["Microsoft Entra", "Conditional Access"]
 tags: ["microsoft entra", "conditional access", "grant controls", "session controls", "defender for cloud apps", "continuous access evaluation", "powershell"]
 author: pankaj
 ---
-# Grant Controls vs Session Controls: Where Most Conditional Access Policies Go Wrong
 
 One of the quickest ways to spot a Conditional Access policy that's going to cause operational pain is when the design stops asking what happens after the user successfully signs in. Most discussions end at MFA, compliant devices, or authentication strength, as though authentication were the final security decision — it isn't. Some Conditional Access decisions happen before Microsoft Entra issues an OAuth or OpenID Connect token, while others continue shaping the session long after authentication has completed. Once you separate those two control planes, a lot of confusing policy behavior suddenly becomes predictable.
 

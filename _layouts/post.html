@@ -8,6 +8,7 @@
 <div class="tg">
 
 {% include site-header-mini.html %}
+{% include ttg-nav.html %}
 
 {% assign tab_slug = page.categories[0] %}
 {% assign sub_slug = page.categories[1] %}
@@ -31,13 +32,8 @@
       {% if item == sub_slug %}
         <div class="section-tab active">{{ item }}</div>
       {% else %}
-        {% assign item_post = nil %}
-        {% for post in site.posts %}
-          {% if post.categories[0] == tab_slug and post.categories[1] == item %}
-            {% assign item_post = post %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
+        {% assign item_siblings = site.posts | where_exp: "p", "p.categories[0] == tab_slug" | where_exp: "p", "p.categories[1] == item" | sort: "date" %}
+        {% assign item_post = item_siblings.first %}
         {% if item_post %}
           <a class="section-tab" href="{{ item_post.url | relative_url }}">{{ item }}</a>
         {% else %}
@@ -45,13 +41,8 @@
         {% endif %}
       {% endif %}
     {% endfor %}
-    {% assign fn_post = nil %}
-    {% for post in site.posts %}
-      {% if post.categories[0] == tab_slug and post.categories[1] == 'Field Notes' %}
-        {% assign fn_post = post %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
+    {% assign fn_siblings = site.posts | where_exp: "p", "p.categories[0] == tab_slug" | where_exp: "p", "p.categories[1] == 'Field Notes'" | sort: "date" %}
+    {% assign fn_post = fn_siblings.first %}
     {% if fn_post %}
       <a class="section-tab" style="color:#2DD4BF" href="{{ fn_post.url | relative_url }}">Field Notes</a>
     {% else %}
