@@ -28,7 +28,7 @@ body { background: #080C14; font-size: 16px; color: #C8D0E8; }
 
 /* ============ BAND 2 — nav (home only) ============ */
 .band2 { background: #0A0E18; border-bottom: 1px solid #141C2E; display: flex; align-items: stretch; height: 40px; overflow: visible; position: sticky; top: 0; z-index: 10; }
-.tab { position: relative; font-size: 13px; font-weight: 700; color: #FFFFFF; flex: 1; display: flex; align-items: center; justify-content: center; cursor: default; border-bottom: 2px solid transparent; transition: opacity 0.12s; white-space: nowrap; padding: 0 4px; gap: 3px; opacity: 1; letter-spacing: 0.02em; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 6px; }
+.tab { position: relative; font-size: 13px; font-weight: 700; color: #FFFFFF; flex: 1; display: flex; align-items: center; justify-content: center; cursor: default; border-bottom: 2px solid transparent; transition: opacity 0.12s; white-space: nowrap; padding: 0 4px; gap: 3px; opacity: 1; letter-spacing: 0.02em; border-radius: 6px; }
 .tab:hover { opacity: 1; background: rgba(255, 255, 255, 0.08); }
 .tab.active { opacity: 1; border-bottom-color: #5B8DB8; background: rgba(91, 141, 184, 0.12); }
 .tab-arrow { font-size: 7px; opacity: 0.4; font-weight: 400; }
