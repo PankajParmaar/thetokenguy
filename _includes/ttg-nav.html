@@ -1,5 +1,5 @@
 <!-- Band 2 — top nav tabs with hover dropdowns, shared across homepage and post/docs pages -->
-{% assign active_tab = page.categories[0] | default: site.posts.first.categories[0] %}
+{% assign active_tab = page.categories[0] %}
 
 <div class="band2">
   {% for tab in site.data.nav %}
