@@ -92,7 +92,7 @@ a.dd-item, a.tab { cursor: pointer; }
 
 .article p { font-family: 'IBM Plex Serif', serif; font-size: 16.5px; line-height: 1.9; color: #A8B4CC; margin-bottom: 1.4rem; }
 .article p strong { color: #C8D0F0; }
-.article p:first-of-type::first-letter { font-family: 'Playfair Display', serif; font-size: 4.2em; font-weight: 700; float: left; line-height: 1; margin-top: 0.12em; margin-right: 0.08em; margin-bottom: -0.1em; color: #C9A84C; }
+.article p:first-of-type::first-letter { font-family: 'Playfair Display', serif; font-size: 4.2em; font-weight: 700; float: left; line-height: 0.75; margin-top: 0.08em; margin-right: 0.1em; margin-bottom: 0; color: #C9A84C; }
 .article h1, .article h2, .article h3 { font-family: 'IBM Plex Serif', serif; font-weight: 600; color: #C8CCDE; margin: 1.8rem 0 0.9rem; line-height: 1.3; }
 .article h2 { font-size: 20px; }
 .article h3 { font-size: 17px; }
