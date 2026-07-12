@@ -45,10 +45,10 @@
         </div>
       {% endif %}
 
-      {% assign related = site.posts | where_exp: "p", "p.categories[0] == featured.categories[0]" | where_exp: "p", "p.url != featured.url" | slice: 0, 3 %}
+      {% assign related = site.posts | where_exp: "p", "p.categories contains 'Microsoft Entra'" | where_exp: "p", "p.url != featured.url" | sort: "date" | reverse | slice: 0, 3 %}
       {% if related.size > 0 %}
         <div style="margin-bottom:1.8rem">
-          <div class="sb-label">Also in {{ featured.categories[0] }}</div>
+          <div class="sb-label">Also in Microsoft Entra</div>
           {% for post in related %}
             <a class="sb-item" href="{{ post.url | relative_url }}">
               <div class="sb-title">{{ post.title }}</div>
@@ -58,7 +58,7 @@
         </div>
       {% endif %}
 
-      {% assign field_notes = site.posts | where_exp: "p", "p.categories[0] == featured.categories[0]" | where_exp: "p", "p.categories[1] == 'Field Notes'" %}
+      {% assign field_notes = site.posts | where_exp: "p", "p.tags contains 'field-notes'" | sort: "date" | reverse %}
       {% if field_notes.size > 0 %}
         <div>
           <div class="sb-label">Field Notes</div>

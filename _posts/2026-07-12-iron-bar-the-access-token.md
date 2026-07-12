@@ -3,7 +3,7 @@ layout: post
 title: "Iron Bar — The Access Token"
 hero_title: "Iron Bar &mdash; The <em>Access Token</em>"
 date: 2026-07-12 00:10:00 +0530
-categories: []
+categories: [featured]
 sitemap: false
 hidden: true
 tags: [identity, access-tokens, history, jwt, zero-trust]
