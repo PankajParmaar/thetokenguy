@@ -31,7 +31,8 @@
 
   <div class="body-grid">
     <article class="article">
-      {% include refactor-content.html content=featured.content lang=lang %}
+      {% assign body_content = featured.content | replace_first: '<p>Sometime', '<p><span class="drop-cap">S</span>ometime' %}
+      {% include refactor-content.html content=body_content lang=lang %}
     </article>
 
     <aside class="sidebar">
