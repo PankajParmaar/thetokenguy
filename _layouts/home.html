@@ -22,7 +22,6 @@
     <div class="hero-glow2"></div>
     <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
-      <div class="hero-eyebrow">Featured Article &mdash; Microsoft Entra &middot; Core Identity</div>
       <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
       <p class="hero-deck">Face. Name. Wax seal. Passport. Smart card. JWT. Six hundred years of credential evolution — and someone is still finding a way through.</p>
       {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
@@ -36,14 +35,29 @@
     </article>
 
     <aside class="sidebar">
-      {% if featured.toc_items %}
-        <div style="margin-bottom:1.8rem">
-          <div class="sb-label">In this article</div>
-          {% for item in featured.toc_items %}
-            <div class="toc-item{% if forloop.first %} cur{% endif %}">{{ item }}</div>
-          {% endfor %}
+      <div style="margin-bottom:1.8rem">
+        <div class="sb-label">Start Here</div>
+        <div class="sb-item">
+          <a href="/posts/what-the-exp-claim-doesnt-protect/" class="sb-title">What the exp Claim Doesn't Protect</a>
+          <div class="sb-tag">Prompt &amp; Token Risk</div>
         </div>
-      {% endif %}
+        <div class="sb-item">
+          <a href="/posts/pim-in-plain-english-what-actually-happens-when-you-activate-a-role/" class="sb-title">PIM in Plain English</a>
+          <div class="sb-tag">Privileged Access</div>
+        </div>
+        <div class="sb-item">
+          <a href="/posts/zero-trust-is-not-a-product/" class="sb-title">Zero Trust Is Not a Product</a>
+          <div class="sb-tag">Principles &amp; Architecture</div>
+        </div>
+        <div class="sb-item">
+          <a href="/posts/what-an-ai-agent-needs-to-authenticate/" class="sb-title">What an AI Agent Needs to Authenticate</a>
+          <div class="sb-tag">AI Agents &amp; Access</div>
+        </div>
+        <div class="sb-item">
+          <a href="/posts/service-principals-vs-managed-identities-the-identity-problem-most-architects-meet-too-late/" class="sb-title">Service Principals vs Managed Identities</a>
+          <div class="sb-tag">Non-Human Identity</div>
+        </div>
+      </div>
 
       {% assign related = site.posts | where_exp: "p", "p.categories contains 'Microsoft Entra'" | where_exp: "p", "p.url != featured.url" | sort: "date" | reverse | slice: 0, 3 %}
       {% if related.size > 0 %}
