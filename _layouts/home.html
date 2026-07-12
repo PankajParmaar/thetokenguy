@@ -22,7 +22,7 @@
     <div class="hero-glow2"></div>
     <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
-      <div class="hero-eyebrow">Featured Article &mdash; {{ featured.categories | join: " &middot; " }}</div>
+      <div class="hero-eyebrow">Featured Article &mdash; Microsoft Entra &middot; Core Identity</div>
       <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
       <p class="hero-deck">Face. Name. Wax seal. Passport. Smart card. JWT. Six hundred years of credential evolution — and someone is still finding a way through.</p>
       {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
@@ -100,9 +100,9 @@
         {% endif %}
       </div>
       <div>
-        {% assign up_next = site.posts | where_exp: "p", "p.categories[1] == featured.categories[1]" | where_exp: "p", "p.url != featured.url" | slice: 0, 2 %}
+        {% assign up_next = site.posts | where_exp: "p", "p.categories contains 'Core Identity'" | where_exp: "p", "p.url != featured.url" | sort: "date" | reverse | slice: 0, 2 %}
         {% if up_next.size > 0 %}
-          <div class="sb-label">Up next in {{ featured.categories[1] }}</div>
+          <div class="sb-label">Up next in Core Identity</div>
           {% for post in up_next %}
             <a class="sb-item" href="{{ post.url | relative_url }}">
               <div class="sb-title">{{ post.title }}</div>
