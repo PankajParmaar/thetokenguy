@@ -130,7 +130,7 @@
     return {
       x: Math.random() * c.width, y: Math.random() * c.height,
       r: Math.random() * 1.2 + 0.3, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .15,
-      a: Math.random() * .5 + .2, p: Math.random() * Math.PI * 2,
+      a: Math.random() * .5 + .4, p: Math.random() * Math.PI * 2,
       hue: Math.random() > 0.6 ? 'teal' : 'blue'
     };
   });
@@ -142,7 +142,7 @@
       if (p.y < 0) p.y = c.height; if (p.y > c.height) p.y = 0;
       for (var j = i + 1; j < pts.length; j++) {
         var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 100) { ctx.beginPath(); ctx.strokeStyle = 'rgba(90,120,200,' + ((1 - d / 100) * .12) + ')'; ctx.lineWidth = .5; ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+        if (d < 100) { ctx.beginPath(); ctx.strokeStyle = 'rgba(90,120,200,' + ((1 - d / 100) * .25) + ')'; ctx.lineWidth = .5; ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
       }
       var a = p.a * (.65 + .35 * Math.sin(p.p));
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
