@@ -13,7 +13,7 @@ If you've spent time in both the Microsoft Entra admin center and the Azure port
 
 A Microsoft Entra tenant is the identity boundary for your organization — think of it as the home for everything related to identity. Inside a tenant you'll find users, groups, devices, applications, service principals, administrative roles, Conditional Access policies, Identity Protection, Privileged Identity Management, and authentication methods. Anything that answers the question "who are you?" belongs in the tenant:
 
-```
+```text
 Contoso Tenant
 │
 ├── Users
@@ -31,7 +31,7 @@ A company typically runs one primary production tenant, though mergers, acquisit
 
 A subscription has nothing to do with users signing in — it's where Azure resources actually live, things like virtual machines, storage accounts, virtual networks, key vaults, Azure SQL, App Services, and AKS clusters. A subscription answers a different set of questions: who pays for this resource, who can deploy resources, what spending limits apply, and which Azure RBAC roles are assigned. A tenant can contain many subscriptions:
 
-```
+```text
 Tenant
 │
 ├── Subscription A (Production)
@@ -50,7 +50,7 @@ Plenty of newcomers create everything inside a single subscription, and that wor
 
 As environments grow, managing dozens or hundreds of subscriptions individually gets painful fast, which is where Management Groups come in — think of them as folders for subscriptions:
 
-```
+```text
 Tenant
 │
 └── Root Management Group
@@ -135,7 +135,7 @@ Get-AzManagementGroupSubscription `
 
 ## Visualizing the hierarchy
 
-```
+```text
 Microsoft Entra Tenant
 │
 ├── Users
