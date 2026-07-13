@@ -66,7 +66,7 @@ body { background: #080C14; font-size: 16px; color: #C8D0E8; }
 }
 
 .tab-arrow { display: none; }
-.dropdown { position: absolute; top: 40px; left: 0; background: rgba(10, 14, 28, 0.97); backdrop-filter: none; -webkit-backdrop-filter: none; border: 1px solid #1A2238; border-radius: 8px; padding: 6px 0; min-width: 210px; z-index: 30; display: none; box-shadow: 0 8px 32px rgba(0,0,0,0.75); }
+.dropdown { position: absolute; top: 100%; left: 0; background: rgba(10, 14, 28, 0.97); backdrop-filter: none; -webkit-backdrop-filter: none; border: 1px solid #1A2238; border-radius: 8px; padding: 6px 0; min-width: 210px; z-index: 30; display: none; box-shadow: 0 8px 32px rgba(0,0,0,0.75); }
 .tab:nth-last-child(-n+2) .dropdown { left: auto; right: 0; }
 .tab:hover .dropdown { display: block; }
 .dd-item { padding: 7px 16px; font-size: 12px; color: #A8AABF; cursor: default; white-space: nowrap; font-weight: 400; display: block; text-decoration: none; }
