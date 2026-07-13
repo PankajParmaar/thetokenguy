@@ -259,6 +259,12 @@ a.dd-item, a.tab { cursor: pointer; }
 .article hr, .docs-content hr { border: none; height: 1px; background: #111828; margin: 2.2rem 0 1.2rem; position: relative; }
 .article hr::after, .docs-content hr::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 5px; height: 5px; border-radius: 50%; background: #2DD4BF; opacity: 0.5; }
 
+/* refactor-content.html strips the <pre> wrapper from code blocks (to fix a
+   kramdown/rouge double-wrap bug), but only <pre> preserves whitespace by
+   default -- without this, newlines inside .highlight code collapse like
+   normal text, regardless of the fence's language label. */
+.highlight code { white-space: pre; }
+
 @media (prefers-reduced-motion: reduce) {
   .wordmark, .mini-logo { animation: none; }
   .ps-cur { animation: none; opacity: 1; }
