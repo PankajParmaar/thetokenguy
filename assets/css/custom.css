@@ -272,18 +272,3 @@ a.dd-item, a.tab { cursor: pointer; }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 768px) {
-  .band2 {
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .band2::-webkit-scrollbar { display: none; }
-  .tab {
-    flex-shrink: 0;
-    font-size: 11px;
-    padding: 6px 10px;
-    margin: 4px 2px;
-  }
-}
