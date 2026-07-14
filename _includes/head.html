@@ -140,4 +140,34 @@
   {% endif %}
 
   {% include metadata-hook.html %}
+
+  {% if page.layout == 'post' %}
+    <!-- TechArticle structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "{{ page.title }}",
+      "description": "{{ page.description }}",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+      "author": {
+        "@type": "Person",
+        "name": "Pankaj Parmar",
+        "url": "https://thetokenguy.net/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Token Guy",
+        "url": "https://thetokenguy.net",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://thetokenguy.net/assets/img/favicons/favicon-96x96.png"
+        }
+      },
+      "image": "{{ page.image.path | prepend: site.url }}",
+      "url": "{{ page.url | prepend: site.url }}"
+    }
+    </script>
+  {% endif %}
 </head>
