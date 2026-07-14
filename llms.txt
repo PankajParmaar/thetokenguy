@@ -1,0 +1,26 @@
+# The Token Guy
+
+> Field notes from an IAM and Cloud Security Practitioner. Lab work,
+> certification study, and the occasional rabbit hole covering Microsoft
+> Entra, Zero Trust, PowerShell & Graph, and AI & Identity.
+
+## Content
+
+- [Microsoft Entra](https://thetokenguy.net/posts/): Identity governance,
+  Conditional Access, PIM, authentication methods, hybrid identity
+- [Zero Trust](https://thetokenguy.net/posts/): Architecture, policy design,
+  network segmentation, identity-centric security
+- [PowerShell & Graph](https://thetokenguy.net/posts/): Microsoft Graph API,
+  automation scripts, audit queries, reporting
+- [AI & Identity](https://thetokenguy.net/posts/): Non-human identity,
+  workload federation, AI agent access patterns
+- [Microsoft 365](https://thetokenguy.net/posts/): Exchange, Teams,
+  SharePoint security and compliance
+- [Microsoft Defender](https://thetokenguy.net/posts/): XDR, Sentinel,
+  threat detection and response
+
+## About
+
+Author: Pankaj Parmar
+Site: https://thetokenguy.net
+Contact: pankaj@thetokenguy.net
