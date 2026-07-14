@@ -29,6 +29,7 @@
     </div>
   </div>
 
+  <main aria-label="Main Content">
   <div class="body-grid">
     <article class="article">
       {% assign body_content = featured.content | replace_first: '<p>Sometime', '<p><span class="drop-cap">S</span>ometime' %}
@@ -87,6 +88,7 @@
       {% endif %}
     </aside>
   </div>
+  </main>
 
   <div class="tail">
     <div class="tail-inner">
