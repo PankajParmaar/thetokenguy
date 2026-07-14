@@ -265,6 +265,17 @@ a.dd-item, a.tab { cursor: pointer; }
    normal text, regardless of the fence's language label. */
 .highlight code { white-space: pre; }
 
+/* This site's highlighter is Rouge (Jekyll's default), not Prism.js --
+   Rouge's PowerShell lexer misidentifies property-accessor dots
+   (e.g. $user.DisplayName) as "err" tokens, which the theme styles with
+   a red/orange background. Neutralize just that token inside PowerShell
+   blocks; specificity has to match the theme's dark-theme-scoped rule
+   (:root[data-bs-theme=dark] .highlight .err) since that already exists. */
+:root[data-bs-theme="dark"] .language-powershell .err {
+  color: inherit;
+  background: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wordmark, .mini-logo { animation: none; }
   .ps-cur { animation: none; opacity: 1; }
