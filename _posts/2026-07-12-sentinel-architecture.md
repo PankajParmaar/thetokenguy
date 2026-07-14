@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "SIEM & Sentinel"]
 tags: ["microsoft sentinel", "siem architecture", "log analytics"]
 author: pankaj
+description: "Sentinel gets sold as a SIEM you just turn on, and functionally it is — but the architecture has dependencies that surface once you design the workspace."
+image:
+  path: /assets/img/og-default.png
+  alt: "Sentinel Architecture"
 ---
 Sentinel gets sold in slide decks as a cloud-native SIEM you can just turn on, and functionally that's true, but the architecture underneath it has a few dependencies that aren't obvious until you're the one designing the workspace layout for a real deployment.
 

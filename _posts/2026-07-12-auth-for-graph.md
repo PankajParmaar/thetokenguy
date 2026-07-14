@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Graph API"]
 tags: ["microsoft-graph", "authentication", "app-registration", "oauth"]
 author: pankaj
+description: "More Graph scripts fail at authentication than at query logic, and the error message rarely says which auth problem it is. How Connect-MgGraph really works."
+image:
+  path: /assets/img/og-default.png
+  alt: "Auth for Graph"
 ---
 More scripts fail at the authentication step than at the actual query logic, and it's rarely obvious from the error message which of the several possible auth problems is the actual cause. Getting comfortable with how Graph authentication actually works — rather than copy-pasting a Connect-MgGraph line from a blog post and hoping — saves a disproportionate amount of debugging time down the line.
 

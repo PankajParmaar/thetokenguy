@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Identity Automation"]
 tags: ["powershell", "licensing", "entra-id", "m365"]
 author: pankaj
+description: "Manual license management drifts quietly — offboarding disables the account but rarely reclaims the license itself. Automating both before finance notices."
+image:
+  path: /assets/img/og-default.png
+  alt: "Automating License Assignment"
 ---
 License assignment sounds like the least interesting corner of IAM until you're the one explaining to finance why the tenant has four hundred unused E5 licenses sitting on accounts that left the company eight months ago. Manual license management drifts quietly because license removal usually isn't a hard step in the offboarding checklist — the account gets disabled, the ticket gets closed, and the license just rides along on a dead account until someone finally cross-references the assignment list against active headcount during a renewal cycle.
 

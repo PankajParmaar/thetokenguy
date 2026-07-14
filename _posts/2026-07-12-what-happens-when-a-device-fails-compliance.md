@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Device & Endpoint Trust"]
 tags: ["device-compliance", "intune", "conditional-access"]
 author: pankaj
+description: "Most explanations stop at 'the policy marks it non-compliant.' What happens after: the actual sequence, and how much is automatic versus someone noticing."
+image:
+  path: /assets/img/og-default.png
+  alt: "What Happens When a Device Fails Compliance"
 ---
 Most explanations of device compliance stop at "the policy checks the device and marks it compliant or not," which leaves out the part practitioners actually need to know: what happens in the minutes and hours after a device slips out of compliance, and how much of that sequence is automatic versus something someone has to notice and act on.
 

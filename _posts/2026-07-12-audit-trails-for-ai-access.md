@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Identity in AI Pipelines"]
 tags: ["audit-logging", "ai-access", "identity-governance", "compliance"]
 author: pankaj
+description: "Knowing an AI pipeline authenticated successfully isn't knowing what it actually read. Why audit trails for agentic access need a completely different question."
+image:
+  path: /assets/img/og-default.png
+  alt: "Audit Trails for AI Access"
 ---
 I went looking through the audit logs for a test AI pipeline I'd built in my lab, expecting to be able to answer a simple question - which specific documents did this pipeline actually read over the past week - and found that the honest answer was "I can tell you the service principal authenticated successfully several thousand times, and I can tell you it called Microsoft Graph's search endpoint, but reconstructing exactly which documents got surfaced to which query requires correlating logs across at least three different systems that weren't designed to be read together." That gap is the practical reality of audit trails for AI access right now, and it's a much bigger problem than it sounds like on first pass.
 

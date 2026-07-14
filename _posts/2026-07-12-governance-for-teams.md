@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Teams & Collaboration"]
 tags: ["teams", "governance", "lifecycle", "microsoft365groups"]
 author: pankaj
+description: "Creating a Team isn't lightweight underneath — it provisions a Group, a SharePoint site, a mailbox, its own lifecycle. What ungoverned creation costs."
+image:
+  path: /assets/img/og-default.png
+  alt: "Governance for Teams"
 ---
 Every Team you create is backed by a Microsoft 365 Group, which in turn provisions a SharePoint site, a shared mailbox, a Planner if used, and now a group in Entra ID with its own membership and lifecycle. That's the part people miss when they think of "creating a Team" as a lightweight action — it isn't lightweight underneath, and a tenant that lets anyone create a Team without any governance wrapped around it ends up, within a year or two, with hundreds of Teams and no clear picture of which ones are still active, who owns them, or what's actually in the SharePoint site behind each one.
 

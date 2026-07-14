@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Endpoint Management"]
 tags: ["intune", "compliancepolicies", "endpointmanagement", "conditionalaccess"]
 author: pankaj
+description: "An Intune compliance policy alone does nothing — it just evaluates. What actually gives compliance policies teeth once Conditional Access is wired to it."
+image:
+  path: /assets/img/og-default.png
+  alt: "Compliance Policies"
 ---
 Intune compliance policies get their real teeth from what they're connected to, not from what they check on their own. A compliance policy by itself is just an evaluation — it looks at a device's configuration against a set of rules and marks the device compliant or non-compliant in Entra ID. Nothing actually happens as a consequence of non-compliance unless a Conditional Access policy is built to key off that compliance state, which means the policy design work really has two halves that need to be built together rather than the compliance rules being configured in isolation and Conditional Access bolted on as an afterthought.
 

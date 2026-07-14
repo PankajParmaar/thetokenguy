@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Identity Defence"]
 tags: ["kerberoasting", "kerberos", "service accounts"]
 author: pankaj
+description: "Kerberoasting explained without the ticket-flow diagrams first: stealing service account passwords by asking AD for what it hands out, then cracking it."
+image:
+  path: /assets/img/og-default.png
+  alt: "Kerberoasting in Plain English"
 ---
 Kerberoasting gets explained in a lot of overly technical writeups full of Kerberos ticket flow diagrams before anyone actually says what the attack is for, so here's the plain version first: it's a way to steal service account passwords by asking Active Directory for something it's designed to hand out to anyone who asks, then cracking that offline at your own pace with no risk of triggering a lockout.
 

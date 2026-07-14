@@ -9,6 +9,9 @@ author: pankaj
 description: "When an AI agent uses a delegated user token, standard identity checks break silently. This post maps the dual-actor blind spot inside Entra ID and the containment strategy architects need today."
 toc: true
 mermaid: true
+image:
+  path: /assets/img/og-default.png
+  alt: "The Authorization Gap: What Entra ID Actually Controls When an AI Agent Acts on Behalf of a Human"
 ---
 
 Enterprise adoption of agentic AI has outpaced the identity architecture meant to govern it. Microsoft 365 Copilot integrations, custom LLM workflows running over the Model Context Protocol (MCP), and cross-tenant AI connectors are now routinely acting inside production tenants — reading mailboxes, querying SharePoint, calling Graph API, executing workflows.

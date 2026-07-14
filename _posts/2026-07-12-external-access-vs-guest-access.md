@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Teams & Collaboration"]
 tags: ["teams", "guestaccess", "externalaccess", "b2b"]
 author: pankaj
+description: "These two Teams settings sit next to each other and get confused constantly. External access is federation; guest access is identity — different models."
+image:
+  path: /assets/img/og-default.png
+  alt: "External Access vs Guest Access"
 ---
 These two settings sit right next to each other in the Teams admin center and get confused constantly, partly because Microsoft's own naming hasn't always made the distinction obvious, and partly because they solve overlapping-sounding problems with completely different security models underneath.
 

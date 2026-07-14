@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Scripting Foundations"]
 tags: ["powershell", "iam", "automation", "graph-api"]
 author: pankaj
+description: "Every IAM admin hits the wall where the portal stops being useful — checking MFA for four thousand users isn't a task, it's a punishment. Enter PowerShell."
+image:
+  path: /assets/img/og-default.png
+  alt: "Why PowerShell for IAM"
 ---
 Every IAM admin eventually hits the wall where the portal stops being useful. You need to check MFA status for four thousand users, or find every guest account that hasn't signed in for ninety days, or bulk-update licenses after a merger. Clicking through Entra admin center for that is not a plan, it's a punishment. This is the point where PowerShell stops being optional and becomes the actual job.
 

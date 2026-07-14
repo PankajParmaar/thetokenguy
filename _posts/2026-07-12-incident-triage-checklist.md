@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Incident Response"]
 tags: ["incident response", "triage checklist", "security operations"]
 author: pankaj
+description: "The gap between calm response and chaos usually isn''t tooling — it''s whether the first fifteen minutes followed an agreed sequence at all, or just didn''t."
+image:
+  path: /assets/img/og-default.png
+  alt: "Incident Triage Checklist"
 ---
 The gap between a good incident response and a chaotic one usually isn't detection quality or tooling, it's whether the first fifteen minutes followed a clear, pre-agreed sequence or whether the on-call analyst started pulling logs and disabling accounts before anyone confirmed which entities were actually affected. A checklist doesn't replace judgment, but it removes the cognitive overhead of deciding what to check first while under pressure.
 

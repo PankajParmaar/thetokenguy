@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Data Protection"]
 tags: ["dlp", "zero-trust", "data-protection"]
 author: pankaj
+description: "DLP gets bolted onto Zero Trust conversations as an afterthought, which is backwards. It answers what other pillars can't: data access after the fact."
+image:
+  path: /assets/img/og-default.png
+  alt: "DLP and Zero Trust"
 ---
 Data Loss Prevention tends to get bolted onto Zero Trust conversations as an afterthought, mentioned briefly at the end after identity, device, and network controls have had their turn. That ordering is backwards in an important sense, because DLP is the pillar that answers a question none of the other three can: even if the right person, on the right device, over the right network path, is accessing a resource they're fully authorized to touch, should this specific piece of data actually be allowed to leave in the way they're trying to move it.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Prompt & Token Risk"]
 tags: ["jwt", "token-expiry", "identity-security", "agentic-ai"]
 author: pankaj
+description: "A JWT's exp claim, fifty-nine minutes out, gives the reassurance it's designed to — accurate as far as it goes, covering a narrower window than assumed."
+image:
+  path: /assets/img/og-default.png
+  alt: "What the exp Claim Doesn't Protect"
 ---
 I decoded a JWT from a test agent flow in my lab a while back mostly out of curiosity, and the `exp` claim sitting there - a Unix timestamp fifty-nine minutes in the future - gave me the same reassurance it's designed to give anyone who checks it. The token expires. Within the hour, whatever this credential can do stops working. That reassurance is accurate as far as it goes, but it covers a much narrower slice of risk than the presence of the claim tends to imply, especially once you're reasoning about agentic flows rather than a single human browser session.
 

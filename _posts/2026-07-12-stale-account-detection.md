@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Reporting & Auditing"]
 tags: ["powershell", "stale-accounts", "entra-id", "offboarding"]
 author: pankaj
+description: "Stale accounts are the quietest risk in an identity environment precisely because nothing about them looks urgent — until one turns out to really matter."
+image:
+  path: /assets/img/og-default.png
+  alt: "Stale Account Detection"
 ---
 Stale accounts are one of the quietest risks in an identity environment, precisely because nothing about them looks urgent. Nobody gets paged when an account sits unused for a year with an active license and standing group memberships — it just sits there as a slightly wider attack surface until someone notices during an audit, or worse, until it turns out to be the account an attacker used because it had valid credentials and nobody was watching it.
 

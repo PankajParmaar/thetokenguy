@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Data Protection"]
 tags: ["sensitivity-labels", "information-protection", "data-protection"]
 author: pankaj
+description: "Sensitivity labels resemble a metadata exercise, which is why tenants stop at 'we've applied labels.' A label classifies — enforcement does the actual work."
+image:
+  path: /assets/img/og-default.png
+  alt: "Sensitivity Labels"
 ---
 Sensitivity labels are the piece of data protection that most closely resembles a metadata tagging exercise on the surface, and that surface impression is exactly why so many tenants stop at "we've applied labels" without realizing the labels themselves do almost nothing on their own. A label is a classifier. What makes it useful is everything wired to act on that classification after it's applied, and that wiring is where most of the real work sits.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Copilot Security"]
 tags: ["microsoft-copilot", "data-access", "permissions", "m365"]
 author: pankaj
+description: "Copilot respects your existing permissions is true in a narrow, technical way. It doesn't get its own access grant — it queries Graph as the signed-in user."
+image:
+  path: /assets/img/og-default.png
+  alt: "What Copilot Can See"
 ---
 I set up a test Microsoft 365 tenant a while back specifically to poke at Copilot's data access model, because the marketing language around it - "Copilot respects your existing permissions" - is true in a narrow, technically accurate way that hides a much messier practical reality. Copilot doesn't get its own separate grant of access to your tenant's data; it runs queries against Microsoft Graph using the identity of whoever is asking it a question, which means in principle it can only surface what that user could already open manually. The catch is that "could already open manually" and "would ever actually find" are two very different things, and Copilot closes that gap in a way that changes the practical risk profile even when the permission model hasn't changed at all.
 

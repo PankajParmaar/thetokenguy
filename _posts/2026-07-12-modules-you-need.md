@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Scripting Foundations"]
 tags: ["powershell", "modules", "microsoft-graph", "entra-id"]
 author: pankaj
+description: "A whole afternoon lost to module conflicts before reaching the actual script logic. Which PowerShell module for IAM still works, versus outdated advice."
+image:
+  path: /assets/img/og-default.png
+  alt: "Modules You Need"
 ---
 I've watched people spend a whole afternoon trying to run an identity script only to get stuck on module conflicts before they even reach the actual logic. The Microsoft PowerShell ecosystem for IAM has been through several generations of modules, and half the confusion out there online is old blog posts referencing modules that are deprecated or being sunset. Sorting out which module actually does what saves real time.
 

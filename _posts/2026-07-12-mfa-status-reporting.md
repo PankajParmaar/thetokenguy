@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Security Automation"]
 tags: ["powershell", "mfa", "entra-id", "reporting"]
 author: pankaj
+description: "How many users don't have MFA sounds simple until status turns out to be spread across registration, enforcement, and legacy per-user settings entirely."
+image:
+  path: /assets/img/og-default.png
+  alt: "MFA Status Reporting"
 ---
 "How many users don't have MFA registered" is one of those questions that sounds simple until you try to answer it precisely, because MFA status in Entra ID isn't a single flag — it's spread across authentication methods registration, conditional access enforcement, and legacy per-user MFA settings that some tenants still have lingering from before conditional access existed. Getting a clean report means understanding which of these you're actually measuring.
 

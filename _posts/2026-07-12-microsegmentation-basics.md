@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Network Access Control"]
 tags: ["microsegmentation", "network-security", "zero-trust"]
 author: pankaj
+description: "Microsegmentation gets cited constantly as least privilege's network-layer counterpart. The mechanics, and why it's harder to retrofit than it sounds."
+image:
+  path: /assets/img/og-default.png
+  alt: "Microsegmentation Basics"
 ---
 Microsegmentation gets mentioned constantly in Zero Trust literature as the network-layer counterpart to least privilege, but the actual mechanics of how it works, and why it's harder to retrofit than most people expect, don't get discussed nearly as often as the concept itself.
 

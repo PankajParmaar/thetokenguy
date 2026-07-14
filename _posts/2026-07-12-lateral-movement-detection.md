@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Identity Defence"]
 tags: ["lateral movement", "defender for identity", "active directory security"]
 author: pankaj
+description: "Initial access gets the writeups because it's dramatic. What determines the blast radius is how an attacker moves after — a different detection problem."
+image:
+  path: /assets/img/og-default.png
+  alt: "Lateral Movement Detection"
 ---
 Initial access gets most of the attention in security writeups because it's the dramatic entry point, but the part of an intrusion that actually determines the blast radius is what happens after: how an attacker moves from the first compromised box to the systems that actually matter. Detecting that movement is a genuinely different problem from detecting the initial foothold, and it's worth understanding why the signal looks so different.
 

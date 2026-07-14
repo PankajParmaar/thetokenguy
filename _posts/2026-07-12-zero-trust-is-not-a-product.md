@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Principles & Architecture"]
 tags: ["zero-trust", "security-architecture", "identity"]
 author: pankaj
+description: "Every vendor booth has a Zero Trust banner implying you just buy the box and the problem goes away. That framing has done more damage than anything else."
+image:
+  path: /assets/img/og-default.png
+  alt: "Zero Trust Is Not a Product"
 ---
 Every vendor booth I have walked past in the last few years has a banner with "Zero Trust" on it somewhere, usually next to a checkmark implying you buy the box and the problem goes away. That framing has done more damage to the concept than almost anything else, because it convinces buyers that Zero Trust is a SKU you procure rather than an architecture you build over years, across identity, device, network, application, and data layers that were never designed to talk to each other in the first place.
 

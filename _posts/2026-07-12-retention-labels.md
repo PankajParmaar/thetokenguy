@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Compliance & Data Protection"]
 tags: ["retention", "purview", "compliance", "recordsmanagement"]
 author: pankaj
+description: "Retention policies and retention labels get used interchangeably in conversation and behave completely differently. When you need labels, not a policy."
+image:
+  path: /assets/img/og-default.png
+  alt: "Retention Labels"
 ---
 Retention in Microsoft Purview comes in two forms that get used almost interchangeably in casual conversation but behave quite differently: retention policies, which apply broadly across a location (a whole mailbox, a whole SharePoint site), and retention labels, which apply at the individual item level and can travel with content as it moves. Understanding when you actually need a label instead of a broad policy is the difference between a retention setup that matches how records actually get created and one that just applies a blanket rule and hopes it's close enough.
 

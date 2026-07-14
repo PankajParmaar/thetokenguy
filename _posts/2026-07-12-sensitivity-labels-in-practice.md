@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "SharePoint & OneDrive"]
 tags: ["sensitivitylabels", "purview", "informationprotection", "sharepoint"]
 author: pankaj
+description: "A sensitivity label looks the same in the portal regardless of what it's applied to — and behaves differently on a document, an email, or a Teams site."
+image:
+  path: /assets/img/og-default.png
+  alt: "Sensitivity Labels in Practice"
 ---
 Sensitivity labels look straightforward in the Purview compliance portal: define a label, attach some protection settings, publish it to users. What's less obvious until you've actually deployed a few is how differently a label behaves depending on what it's applied to — a Word document, an email, a SharePoint site, or a Teams container all treat the same label name in meaningfully different ways, and conflating them is where deployments go sideways.
 

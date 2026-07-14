@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Non-Human Governance"]
 tags: ["workload-identity", "managed-identity", "non-human-identity", "cloud-security"]
 author: pankaj
+description: "The moment a client secret in a config file gets replaced by a managed identity is a small, real relief — one less credential to rotate or leak by accident."
+image:
+  path: /assets/img/og-default.png
+  alt: "Workload Identities"
 ---
 The moment I stopped storing a client secret in a config file and switched a test workload over to a managed identity, I felt a small but real sense of relief - one less credential I had to remember to rotate, one less string that could leak if I accidentally committed a file I shouldn't have. That's the appeal of workload identity in one sentence: it lets a piece of compute prove who it is using something the platform itself attests to, rather than a secret a human has to generate, store, and eventually forget to rotate.
 

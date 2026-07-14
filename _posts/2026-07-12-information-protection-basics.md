@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Data Protection"]
 tags: ["information-protection", "purview", "data-protection"]
 author: pankaj
+description: "Information protection is bigger than the sensitivity labels people associate with it. Classification, encryption, enforcement each fail silently alone."
+image:
+  path: /assets/img/og-default.png
+  alt: "Information Protection Basics"
 ---
 Information protection as a discipline covers more ground than the sensitivity labels most people associate with it, and it's worth separating the pieces because they solve different problems that only add up to real data protection when combined deliberately. The three pieces I've worked through in a lab Purview setup are classification, encryption, and policy enforcement, and each one fails silently if the others aren't in place around it.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Teams & Collaboration"]
 tags: ["teams", "policies", "governance", "admincenter"]
 author: pankaj
+description: "The Teams admin center has policy categories for nearly everything, and it''s easy to miss the handful that actually shape daily risk and user experience."
+image:
+  path: /assets/img/og-default.png
+  alt: "Teams Policies That Matter"
 ---
 The Teams admin center has policy categories for nearly everything — messaging, meetings, calling, live events, app permissions — and it's easy to spend an afternoon in there without touching the handful of settings that actually shape day-to-day risk and user experience. A few of these are worth understanding properly rather than leaving on whatever the tenant defaulted to.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Threat Protection"]
 tags: ["defender for identity", "active directory", "threat detection"]
 author: pankaj
+description: "Most of Defender for Identity's value depends on getting sensor placement right on domain controllers. What it actually flags once it's watching your AD."
+image:
+  path: /assets/img/og-default.png
+  alt: "Defender for Identity Explained"
 ---
 The first time I set up Defender for Identity in a lab, I expected another agent-heavy deployment with a dozen moving parts. What actually surprised me was how much of it depends on getting the sensor placement right on domain controllers, and how quickly it starts flagging things you didn't know were happening on your own AD, like a service account doing NTLM auth to a box it has no business talking to.
 

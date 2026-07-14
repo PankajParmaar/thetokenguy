@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Tenant Administration"]
 tags: ["microsoft365", "domain", "dns", "tenant"]
 author: pankaj
+description: "Adding a custom domain looks like a five-minute TXT record task. It stalls when DNS and Microsoft 365 are owned by entirely different teams altogether."
+image:
+  path: /assets/img/og-default.png
+  alt: "Domain Verification"
 ---
 Adding a custom domain to a Microsoft 365 tenant looks like a five-minute task on paper: paste a TXT record, wait, click verify. In practice it's where a surprising number of setups stall out, mostly because the DNS side of the house and the Microsoft 365 side are owned by different teams — IT holds the tenant, a web host or registrar admin holds the zone file — and the TXT record request sits in someone's inbox until verification fails for the third time and it finally gets escalated.
 

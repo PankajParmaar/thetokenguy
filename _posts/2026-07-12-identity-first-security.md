@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Identity as the Perimeter"]
 tags: ["identity", "zero-trust", "conditional-access"]
 author: pankaj
+description: "Identity-first security sounds like marketing until you build an access model around it. Asking who's making the request instead of where changes everything."
+image:
+  path: /assets/img/og-default.png
+  alt: "Identity-First Security"
 ---
 Identity-first security is one of those phrases that sounds like marketing until you actually try to build an access model around it, at which point it becomes a genuinely different way of designing controls compared to the network-perimeter habits most of us grew up with. The core idea is straightforward: instead of asking "where is this request coming from," you ask "who is making this request, on what device, doing what, and how confident are we in all three." Identity becomes the anchor that every other signal attaches to.
 

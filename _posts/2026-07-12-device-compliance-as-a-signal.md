@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Device & Endpoint Trust"]
 tags: ["device-compliance", "intune", "conditional-access"]
 author: pankaj
+description: "Treating device compliance as a binary gate misses what makes it useful in Zero Trust. It's one signal feeding a decision, not a standalone control alone."
+image:
+  path: /assets/img/og-default.png
+  alt: "Device Compliance as a Signal"
 ---
 Device compliance gets treated in a lot of tenants as a binary gatekeeper — compliant devices get in, non-compliant ones get blocked — and that framing misses what makes it actually useful in a Zero Trust architecture. Compliance state is a signal, one input feeding a broader access decision, not a standalone security control that does its job the moment it is switched on.
 

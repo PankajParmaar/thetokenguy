@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Vulnerability Management"]
 tags: ["software inventory", "asset management", "defender vulnerability management"]
 author: pankaj
+description: "Vulnerability conversations jump straight to CVEs and patch cycles, but none of that scoring means anything without knowing what's actually installed."
+image:
+  path: /assets/img/og-default.png
+  alt: "Software Inventory"
 ---
 Vulnerability management conversations tend to jump straight to CVEs and patch cycles, but none of that scoring means anything without an accurate answer to the much more basic question underneath it: what software is actually installed across the estate. Software inventory in Defender Vulnerability Management is the unglamorous foundation everything else sits on, and it's also where I've seen the most quietly wrong assumptions live.
 

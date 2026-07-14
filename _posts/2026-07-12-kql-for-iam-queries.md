@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "SIEM & Sentinel"]
 tags: ["kql", "identity queries", "azure ad logs"]
 author: pankaj
+description: "KQL is what everything in Sentinel funnels through eventually. Coming from IAM rather than general SOC work, the tables worth learning first are much narrower."
+image:
+  path: /assets/img/og-default.png
+  alt: "KQL for IAM Queries"
 ---
 KQL is the language everything in Sentinel eventually funnels through, and if you're coming from an IAM background rather than a general SOC background, the tables and query patterns worth knowing first are narrower than the full breadth of what Sentinel supports, so it's worth being deliberate about which parts to learn first.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Reporting & Auditing"]
 tags: ["powershell", "access-reviews", "entra-id", "reporting"]
 author: pankaj
+description: "Show me who has access to Finance sounds like a five-minute query. Without prior reporting scripts, it isn't — until the report's ready in advance already."
+image:
+  path: /assets/img/og-default.png
+  alt: "Generating Access Reports"
 ---
 Access reports are the artifact an auditor asks for on day one of every review, and building one from scratch under deadline pressure is a bad way to spend that first day. "Show me who has access to the finance SharePoint site" or "list every user with an active role assignment" sounds like a query someone should be able to answer in five minutes, and in a tenant without prior reporting scripts, it usually takes an afternoon of manual cross-referencing instead.
 

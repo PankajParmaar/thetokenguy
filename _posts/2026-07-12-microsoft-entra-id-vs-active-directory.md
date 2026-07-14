@@ -5,6 +5,10 @@ date: 2026-07-12 00:02:00 +0530
 categories: ["Microsoft Entra", "Core Identity"]
 tags: ["microsoft entra", "active directory", "entra id", "hybrid identity", "powershell"]
 author: pankaj
+description: "Treating Entra ID as Active Directory in the cloud causes the most confusion in the admin center. Same goal as AD, completely different assumptions though."
+image:
+  path: /assets/img/og-default.png
+  alt: "Microsoft Entra ID vs Active Directory: Same Goal, Different Assumptions"
 ---
 
 One of the most common mistakes when learning Microsoft Entra is treating it as "Active Directory in the cloud." It isn't, and the gap between the two products causes more confusion than almost any other concept in the Entra admin center. Both platforms solve identity problems, but they were designed for completely different environments — if you approach Entra expecting Organizational Units, Group Policy, LDAP, or Kerberos to exist the way they do in Active Directory, you'll spend more time unlearning than learning. The easiest way through this is to stop comparing features and start comparing the design assumptions each product was built on.

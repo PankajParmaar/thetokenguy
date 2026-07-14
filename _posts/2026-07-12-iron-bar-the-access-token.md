@@ -10,6 +10,9 @@ tags: [identity, access-tokens, history, jwt, zero-trust]
 author: pankaj
 description: "Face. Name. Wax seal. Passport. Smart card. JWT. Six hundred years of credential evolution — and someone is still finding a way through."
 
+image:
+  path: /assets/img/og-default.png
+  alt: "Iron Bar — The Access Token"
 ---
 
 Sometime in the ninth century, if you stood accused and the evidence ran out, they handed you a bar of iron pulled from a fire.

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Threat Protection"]
 tags: ["attack surface reduction", "defender for endpoint", "hardening"]
 author: pankaj
+description: "ASR rules sit on every hardening checklist and get ignored anyway, since reading audit-mode results is tedious. What the rules block, and why it's worth it."
+image:
+  path: /assets/img/og-default.png
+  alt: "Attack Surface Reduction"
 ---
 Attack surface reduction rules are one of those Defender features that get mentioned in every hardening checklist but rarely get the attention they deserve, mostly because turning them on in audit mode and actually reading the results is tedious work that competes with everything else on a security team's plate.
 

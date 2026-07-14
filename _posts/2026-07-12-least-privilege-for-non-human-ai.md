@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "AI Agents & Access"]
 tags: ["least-privilege", "ai-agents", "non-human-identity", "access-control"]
 author: pankaj
+description: "Least privilege gets abandoned the moment a deadline shows up. With human users that habit is bad but bounded. With AI agents, it isn't bounded at all."
+image:
+  path: /assets/img/og-default.png
+  alt: "Least Privilege for Non-Human AI"
 ---
 Least privilege is one of those principles that shows up in every access control policy document and gets abandoned the moment a deadline shows up. I've done it myself in lab setups - given an agent owner-level access to a resource group because scoping down a custom role would have taken another hour, telling myself I'd tighten it later. With human users that habit is bad but bounded, because a person's access maps roughly to their job function and someone eventually notices if it's wildly wrong. With AI agents the same habit compounds differently, because an agent doesn't have a job function in the traditional sense - it has a task list that changes, and the permission set that felt reasonable for task one quietly becomes way too broad for task fifty.
 

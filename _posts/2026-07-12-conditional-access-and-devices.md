@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Endpoint Management"]
 tags: ["conditionalaccess", "intune", "devices", "entraid"]
 author: pankaj
+description: "Three device conditions in Conditional Access sound interchangeable and aren't. Picking wrong either blocks the right people or lets in the wrong devices."
+image:
+  path: /assets/img/og-default.png
+  alt: "Conditional Access and Devices"
 ---
 Device state is one of the strongest signals available to a Conditional Access policy, but it's also one of the most misunderstood, because there are three related-but-distinct device conditions available, and picking the wrong one produces a policy that either blocks people it shouldn't or, worse, lets in devices that were never actually meant to pass.
 

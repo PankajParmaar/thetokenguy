@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Exchange Online"]
 tags: ["exchangeonline", "sharedmailbox", "distributionlist", "groups"]
 author: pankaj
+description: "A shared mailbox created where a distribution list belonged usually happens because someone reached for whichever they'd used last. Different problems."
+image:
+  path: /assets/img/og-default.png
+  alt: "Shared Mailboxes vs Distribution Lists"
 ---
 This is one of those distinctions that seems obvious once you've worked with both, but I've seen plenty of setups where a shared mailbox got created for something that should have been a distribution list, or vice versa, purely because the person setting it up reached for whichever one they'd used most recently. They solve genuinely different problems, and the wrong choice tends to surface as an operational annoyance months later rather than an immediate failure.
 

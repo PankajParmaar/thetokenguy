@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "AI Agents & Access"]
 tags: ["ai-agents", "oauth-scopes", "token-design", "access-control"]
 author: pankaj
+description: "A single .default scope grants whatever the app registration was consented for — far more than an agent whose actual job was reading three calendar events."
+image:
+  path: /assets/img/og-default.png
+  alt: "Token Scope for Agents"
 ---
 The first token I ever pulled out of an agent's request headers in my home lab had a scope string that read `https://graph.microsoft.com/.default`. That single scope grants whatever the app registration itself was consented for, which in the test tenant I'd built happened to include Mail.Read, Files.ReadWrite.All, and User.Read.All. The agent's actual job was to read three specific calendar events. That gap between what a token allows and what a task requires is the entire scope problem in one screenshot, and it's the reason token scoping for AI agents deserves more attention than it usually gets.
 

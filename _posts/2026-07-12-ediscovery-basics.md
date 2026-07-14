@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Compliance & Data Protection"]
 tags: ["ediscovery", "purview", "compliance", "legalhold"]
 author: pankaj
+description: "Nobody learns eDiscovery until legal needs it urgently — the worst time to learn a case from a search from a hold. Get familiar with it before that day."
+image:
+  path: /assets/img/og-default.png
+  alt: "eDiscovery Basics"
 ---
 eDiscovery is one of those Microsoft 365 capabilities most admins never touch until the day someone from legal or HR needs it urgently, which is exactly the wrong time to be learning the difference between a case, a search, and a hold for the first time. Getting familiar with the mechanics ahead of an actual need is worth the time, because the tooling has enough moving parts that improvising under pressure is a good way to miss something a court or regulator later asks about.
 

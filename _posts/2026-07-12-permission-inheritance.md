@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "SharePoint & OneDrive"]
 tags: ["sharepoint", "permissions", "inheritance", "governance"]
 author: pankaj
+description: "SharePoint permission inheritance is simple to explain and hard to keep straight after years of one-off breaks. Knowing beats checking it every single time."
+image:
+  path: /assets/img/og-default.png
+  alt: "Permission Inheritance"
 ---
 Permission inheritance in SharePoint is one of those concepts that's simple to explain and genuinely difficult to keep straight once a site has been alive for a couple of years with people breaking inheritance here and there to solve one-off problems. Understanding the model properly is what separates "I can predict who can see this folder" from "I have to actually go check every time," which matters a lot when you're trying to reason about exposure during a review.
 

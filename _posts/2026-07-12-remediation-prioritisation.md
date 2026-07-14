@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Vulnerability Management"]
 tags: ["remediation", "vulnerability management", "patch prioritization"]
 author: pankaj
+description: "Every vulnerability scan outpaces any patching team's capacity to clear it. CVSS alone was never a good enough filter for what actually matters first."
+image:
+  path: /assets/img/og-default.png
+  alt: "Remediation Prioritisation"
 ---
 Every vulnerability scan produces a longer list than any patching team can realistically clear before the next scan runs, which means prioritization isn't an optional refinement step, it's the actual job. CVSS score alone has never been a good enough filter for that, and Defender Vulnerability Management's approach is built around that exact problem.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Graph API"]
 tags: ["microsoft-graph", "powershell", "queries", "entra-id"]
 author: pankaj
+description: "The same handful of Graph questions come up constantly across identity work. A personal reference worth keeping instead of re-deriving them every time."
+image:
+  path: /assets/img/og-default.png
+  alt: "Common IAM Queries"
 ---
 There's a small set of Graph queries that show up constantly across identity work, regardless of what the specific task of the day happens to be — someone asks a variation of the same handful of questions often enough that it's worth keeping a personal reference of the exact syntax rather than re-deriving it from documentation every time. This is the shortlist I actually reach for.
 

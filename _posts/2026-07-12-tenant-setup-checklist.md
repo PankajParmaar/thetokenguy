@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Tenant Administration"]
 tags: ["microsoft365", "tenant", "administration", "identity"]
 author: pankaj
+description: "Every tenant setup starts the same way: sign up, add a domain, create a few accounts, call it done. Decisions skipped early become load-bearing much later."
+image:
+  path: /assets/img/og-default.png
+  alt: "Tenant Setup Checklist"
 ---
 Every Microsoft 365 tenant I've poked around in my lab started the same way: someone signed up, added a domain, created a few accounts, and called it done. That's fine for a trial, but if you're setting one up to actually study how the platform behaves, or standing one up for a small org, skipping the early decisions costs you later. Tenant-level settings have a habit of becoming load-bearing once users, mail, and data pile on top of them, and unwinding a bad default six months in is a different kind of work than getting it right on day one.
 

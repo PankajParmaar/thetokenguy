@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Cloud App Security"]
 tags: ["mcas", "defender for cloud apps", "casb"]
 author: pankaj
+description: "Still called MCAS in conversation years after the rename. The shift from Cloud App Security to Defender for Cloud Apps tracked something genuinely real."
+image:
+  path: /assets/img/og-default.png
+  alt: "MCAS vs Defender for Cloud Apps"
 ---
 I still see people refer to it as MCAS in conversation, myself included half the time, even though Microsoft renamed Microsoft Cloud App Security to Microsoft Defender for Cloud Apps back in 2021. It's not a trivial rebrand either, because the rename tracked a real shift in how the product fits into the broader Defender suite, and understanding that shift matters more than memorizing the new name.
 

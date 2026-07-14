@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Scripting Foundations"]
 tags: ["powershell", "error-handling", "scripting", "reliability"]
 author: pankaj
+description: "A script that silently skips half its targets in production is worse than one that crashes. Error handling that surfaces failures instead of hiding them."
+image:
+  path: /assets/img/og-default.png
+  alt: "Error Handling Patterns"
 ---
 A script that runs cleanly in testing and then silently skips half its targets in production is worse than one that crashes outright. I had exactly this happen with an offboarding script — it "completed successfully" against a batch of forty terminated accounts, but a permissions timeout had quietly skipped six of them, and the gap only surfaced three weeks later when one of those six accounts showed up in a sign-in log during an access review. Error handling in identity scripts isn't about making things look tidy — it's about knowing, with certainty, what happened to every single object you touched.
 

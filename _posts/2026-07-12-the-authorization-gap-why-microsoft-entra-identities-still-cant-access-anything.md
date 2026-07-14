@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Entra", "Non-Human Identity"]
 tags: ["microsoft entra", "authorization", "service principals", "managed identity", "microsoft graph", "azure rbac", "app roles", "zero trust"]
 author: pankaj
+description: "Authentication succeeds, the token has the right claims, and the first request still returns 403. The authorization gap that surfaces during deployments."
+image:
+  path: /assets/img/og-default.png
+  alt: "The Authorization Gap: Why Microsoft Entra Identities Still Can't Access Anything"
 ---
 
 The authorization gap usually surfaces during deployments rather than design reviews. A workload authenticates successfully against the Microsoft Entra token endpoint, receives an access token with the expected audience and claims, and proceeds exactly as the authentication flow intended. The first request to the target service immediately returns HTTP 403. Authentication has completed successfully, yet the workload remains functionally unusable because nothing in the token issuance process establishes whether the target resource is willing to authorize the requested operation. Engineering teams frequently spend hours decoding JWT claims, validating certificate thumbprints, reviewing OAuth scopes, and comparing token contents, even though the failure sits entirely outside the authentication pipeline. The identity platform has already completed its responsibility; the authorization decision belongs to the resource receiving the request.

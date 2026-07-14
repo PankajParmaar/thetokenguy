@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Entra", "Governance"]
 tags: ["microsoft entra", "lifecycle workflows", "identity governance", "hr integration", "microsoft graph", "joiner mover leaver"]
 author: pankaj
+description: "Lifecycle Workflows execute exactly as configured. The failures blamed on them almost always start upstream, inside an HR system that never sent a valid event."
+image:
+  path: /assets/img/og-default.png
+  alt: "Lifecycle Workflows in Microsoft Entra: Identity Automation Is Only as Good as Your HR Data"
 ---
 
 Lifecycle Workflows execute exactly as configured. The operational failures attributed to them almost always originate much earlier, inside the HR systems responsible for publishing identity events into Microsoft Entra. A Joiner workflow cannot provision an identity that never receives a valid hire event, and it cannot evaluate conditions based on attributes that arrive late, contain inconsistent values, or never synchronize at all. A delayed Workday export, an incomplete SuccessFactors payload, or a failed provisioning connector doesn't produce a workflow error in the traditional sense — instead, the workflow simply never qualifies for execution because its trigger conditions are never satisfied. From an operational perspective this is significantly more dangerous than an outright failure, because compliance dashboards continue reporting healthy workflow execution while the user begins employment without licensing, application access, group membership, or onboarding tasks, since the identity lifecycle never officially started.

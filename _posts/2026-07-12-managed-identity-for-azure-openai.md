@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Identity in AI Pipelines"]
 tags: ["managed-identity", "azure-openai", "azure", "identity"]
 author: pankaj
+description: "Rebuilding the same Azure OpenAI setup twice — once with an API key, once with a managed identity — to see the operational difference beyond talking points."
+image:
+  path: /assets/img/og-default.png
+  alt: "Managed Identity for Azure OpenAI"
 ---
 I rebuilt a small Azure OpenAI test setup in my lab twice - once with an API key sitting in an environment variable, and once with a system-assigned managed identity handling authentication instead - specifically to see how different the operational experience actually was, beyond the security talking points. The difference was smaller in terms of code changes than I expected and larger in terms of what I stopped having to worry about, which is roughly the pattern I'd expect managed identity to follow for any Azure-native service.
 

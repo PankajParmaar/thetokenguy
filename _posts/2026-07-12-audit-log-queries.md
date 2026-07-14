@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Reporting & Auditing"]
 tags: ["powershell", "audit-logs", "entra-id", "compliance"]
 author: pankaj
+description: "The directory audit log is unglamorous until an incident review needs to know exactly who changed this and when. The queries worth having ready first."
+image:
+  path: /assets/img/og-default.png
+  alt: "Audit Log Queries"
 ---
 The directory audit log is where every administrative action in Entra ID gets recorded — role assignments, policy changes, group creation, password resets triggered by an admin rather than the user themselves. It's also one of the least glamorous parts of the tenant, right up until an incident review or a compliance audit needs to answer "who changed this and when," and the answer needs to come from actual log data rather than someone's recollection of a Slack thread from three months ago.
 

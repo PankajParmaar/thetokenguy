@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Vulnerability Management"]
 tags: ["exposure score", "threat and vulnerability management", "risk scoring"]
 author: pankaj
+description: "Leadership latches onto the exposure score as a single report-card number, which is exactly the wrong way to read it. Why it's a diagnostic, not a grade."
+image:
+  path: /assets/img/og-default.png
+  alt: "Exposure Score"
 ---
 The exposure score in Defender Vulnerability Management is one of those numbers leadership latches onto immediately because it's a single figure that seems to answer "how exposed are we," and it's also one of the numbers most likely to get treated as a report card rather than a diagnostic, especially when the trend line gets handed to leadership without a breakdown of which device group or CVE is actually driving the move.
 

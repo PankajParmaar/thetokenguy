@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Identity as the Perimeter"]
 tags: ["identity", "network-security", "zero-trust"]
 author: pankaj
+description: "The network perimeter was the primary control — firewalls at the edge, VPN, trust implied by location. That stopped working once apps left the data center."
+image:
+  path: /assets/img/og-default.png
+  alt: "Why the Network Is No Longer Enough"
 ---
 For most of my career the network perimeter was the primary security control. Firewalls at the edge, VPN concentrators for remote access, and an implicit assumption that anything inside the building or on the corporate VPN was trustworthy by default. That model made sense when applications lived in a data center you controlled and users sat at desks connected to a network you built. It stopped making sense the moment SaaS applications, remote work, and BYOD became the default rather than the exception, and yet a surprising number of environments I have looked at in labs and case studies still carry that network-first assumption baked into their access policies.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Exchange Online"]
 tags: ["exchangeonline", "mailflow", "transport", "smtp"]
 author: pankaj
+description: "Mail flow looks simple from the mailbox side — hit send, message arrives. The pipeline underneath explains most delivery problems that don't add up otherwise."
+image:
+  path: /assets/img/og-default.png
+  alt: "How Mail Flow Works"
 ---
 Mail flow in Exchange Online looks simple from the mailbox side — you hit send and the message appears in someone's inbox a few seconds later — but there's a pipeline underneath that's worth understanding properly, because most of the weird delivery problems I've dug into in my own lab tenant turn out to be a misunderstanding of which stage of that pipeline actually touched the message.
 

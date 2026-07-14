@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Prompt & Token Risk"]
 tags: ["token-theft", "agentic-ai", "oauth", "session-security"]
 author: pankaj
+description: "Token theft isn't new — infostealers and AiTM kits have harvested session tokens for years. What's changed is the blast radius one stolen token now reaches."
+image:
+  path: /assets/img/og-default.png
+  alt: "Token Theft in Agentic Flows"
 ---
 Token theft isn't a new problem - infostealer malware has been harvesting browser session tokens for years, and adversary-in-the-middle phishing kits that steal tokens post-authentication are well documented at this point. What's changed is the shape of the target. In a normal browser session, a stolen token gets you into one application, scoped to whatever that session was doing. In an agentic flow, a single stolen token can sit at the center of a chain of automated actions across multiple systems, and the agent's own architecture often makes that token easier to get at than a browser's would be.
 

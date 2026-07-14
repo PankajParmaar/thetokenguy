@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Incident Response"]
 tags: ["containment", "incident response", "defender for endpoint"]
 author: pankaj
+description: "Containment is where incident response stops observing and starts interfering, and every action tips your hand. How to isolate without pushing further."
+image:
+  path: /assets/img/og-default.png
+  alt: "Containment Steps"
 ---
 Containment is the step where incident response stops being purely observational and starts actively interfering with an attacker's access, and that shift changes the risk calculus entirely. Every containment action tips your hand, and doing it too early or too crudely can push an attacker to accelerate, destroy evidence, or move to a foothold you don't know about yet.
 

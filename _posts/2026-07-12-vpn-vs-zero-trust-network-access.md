@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Network Access Control"]
 tags: ["vpn", "ztna", "network-security"]
 author: pankaj
+description: "VPN is dead, replace it with ZTNA oversimplifies a decision about what kind of access grant each model produces, tested side by side, not on marketing."
+image:
+  path: /assets/img/og-default.png
+  alt: "VPN vs Zero Trust Network Access"
 ---
 The pitch for Zero Trust Network Access is usually framed as "VPN is dead, replace it," which oversimplifies a decision that actually comes down to what kind of access grant each model produces and whether that grant matches what you're trying to protect. I've set both up in a lab to compare them directly rather than take the marketing framing at face value, and the difference is less about which technology is newer and more about the shape of the trust each one hands out.
 

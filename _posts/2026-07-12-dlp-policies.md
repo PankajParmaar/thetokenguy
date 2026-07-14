@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Compliance & Data Protection"]
 tags: ["dlp", "purview", "compliance", "datalossprevention"]
 author: pankaj
+description: "A DLP policy designed with only email in mind produces unexpected results elsewhere. Purview DLP spans Exchange, SharePoint, OneDrive, Teams, endpoints."
+image:
+  path: /assets/img/og-default.png
+  alt: "DLP Policies"
 ---
 Data loss prevention policies in Microsoft Purview cover a wider surface than most people expect the first time they set one up — Exchange, SharePoint, OneDrive, Teams chat, and endpoint devices through the Purview endpoint DLP agent, all evaluated against the same policy definitions. That breadth is the point, but it also means a DLP policy designed with only email in mind can produce unexpected behavior the moment it starts evaluating Teams chat messages or files being copied to a USB drive on a managed endpoint.
 

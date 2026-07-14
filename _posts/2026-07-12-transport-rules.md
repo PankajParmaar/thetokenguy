@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Exchange Online"]
 tags: ["exchangeonline", "transportrules", "mailflow", "dlp"]
 author: pankaj
+description: "Mail flow rules are the if-this-then-that layer inside Exchange Online's transport — powerful enough to redirect or block mail the mailbox side never shows."
+image:
+  path: /assets/img/og-default.png
+  alt: "Transport Rules"
 ---
 Transport rules, officially called mail flow rules in the Exchange admin center, are the "if this, then that" layer sitting inside the mail flow pipeline. They're conditional logic applied to every message that passes through Exchange Online's transport service, and they're powerful enough to quietly redirect, modify, or block mail in ways that are hard to spot from the mailbox side unless you know to go looking at the rule list itself.
 

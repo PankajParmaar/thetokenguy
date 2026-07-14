@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Device & Endpoint Trust"]
 tags: ["hybrid-join", "entra-join", "device-management"]
 author: pankaj
+description: "Hybrid Azure AD Join and Entra Join aren't two flavors of the same choice. They rest on different assumptions about whether on-prem AD still has a say."
+image:
+  path: /assets/img/og-default.png
+  alt: "Hybrid Join vs Entra Join"
 ---
 Every time I've set up a new test tenant and had to decide how to join a Windows device, the choice between Hybrid Azure AD Join and Entra Join (formerly Azure AD Join) turns out to matter a lot more than the Microsoft documentation's neutral tone suggests. These aren't two equally valid flavors of the same thing — they represent genuinely different assumptions about whether on-premises Active Directory is still part of your architecture, and picking the wrong one for your actual environment creates friction that shows up months later.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Security Automation"]
 tags: ["powershell", "sign-in-logs", "entra-id", "threat-detection"]
 author: pankaj
+description: "Sign-in logs are the richest behavioral data in a tenant and the easiest to drown in. Scrolling the portal for anomalies is like finding one grain of sand."
+image:
+  path: /assets/img/og-default.png
+  alt: "Sign-in Log Analysis"
 ---
 Sign-in logs are the single richest source of behavioral data in a Microsoft tenant, and also the easiest to drown in. A mid-size tenant generates tens of thousands of sign-in events a day, and scrolling through them in the portal to spot an anomaly is roughly as effective as looking for a specific grain of sand on a beach. The value only shows up once you're pulling them through Graph and filtering for the specific patterns that actually matter.
 

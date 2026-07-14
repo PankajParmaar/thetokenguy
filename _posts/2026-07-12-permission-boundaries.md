@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Copilot Security"]
 tags: ["permission-boundaries", "microsoft-copilot", "access-control", "m365"]
 author: pankaj
+description: "Testing Copilot against a deliberately messy tenant reframes what a permission boundary means once an AI, not a human, is the one exercising the permission."
+image:
+  path: /assets/img/og-default.png
+  alt: "Permission Boundaries"
 ---
 Somewhere in the middle of testing Copilot's behavior against a deliberately messy test tenant, I realized the phrase "permission boundary" means something slightly different once an AI assistant is the one exercising the permission, and that difference is worth being precise about instead of glossing over with the usual "least privilege" language.
 

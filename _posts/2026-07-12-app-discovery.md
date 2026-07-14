@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Cloud App Security"]
 tags: ["cloud discovery", "shadow it", "defender for cloud apps"]
 author: pankaj
+description: "Cloud Discovery in Defender for Cloud Apps always finds more SaaS than IT expects. How the traffic data gets in, and what to do with the gap it exposes."
+image:
+  path: /assets/img/og-default.png
+  alt: "App Discovery"
 ---
 Every org I've looked at, including my own lab setups where I've deliberately let traffic accumulate before running discovery, turns up a longer list of SaaS apps in use than anyone expects. Cloud discovery in Defender for Cloud Apps is the feature built to surface exactly that gap between the apps IT thinks are in use and the apps actually generating traffic.
 

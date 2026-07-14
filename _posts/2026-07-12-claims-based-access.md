@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Identity as the Perimeter"]
 tags: ["claims", "identity", "authorization"]
 author: pankaj
+description: "You can describe what a Conditional Access policy does without knowing what a claim is. The mechanism that makes identity-first security work underneath."
+image:
+  path: /assets/img/og-default.png
+  alt: "Claims-Based Access"
 ---
 Claims-based access is the mechanism that makes identity-first security actually work under the hood, and it is worth slowing down on because most people who use Entra ID daily can describe what a Conditional Access policy does without being able to describe what a claim actually is or how it gets from the identity provider into the application making the authorization decision.
 

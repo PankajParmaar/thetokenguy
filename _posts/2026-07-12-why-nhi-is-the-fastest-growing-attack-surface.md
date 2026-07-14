@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Non-Human Governance"]
 tags: ["non-human-identity", "attack-surface", "service-accounts", "governance"]
 author: pankaj
+description: "A rough count in one lab tenant put workload accounts at roughly six times the human user count — and that ratio is on the low end industry-wide still."
+image:
+  path: /assets/img/og-default.png
+  alt: "Why NHI Is the Fastest Growing Attack Surface"
 ---
 I did a rough count once in a lab tenant I'd been building up over a year of testing - service principals, managed identities, API keys, workload accounts, CI/CD credentials - and the number came out to roughly six times the number of actual human users I'd created. That ratio is not unusual; it's actually on the low end of what I've seen referenced in industry reporting on production tenants. Every human identity in most organizations comes with an onboarding process, an offboarding process, and at least some periodic access review, however imperfect. Non-human identities came into existence as a side effect of someone building something, and in a lot of cases the ticket that created them never named an owner, so there's no name to attach to a deprovisioning request when the project ends.
 

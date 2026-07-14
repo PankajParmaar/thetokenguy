@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Incident Response"]
 tags: ["post incident review", "lessons learned", "incident response"]
 author: pankaj
+description: "The post-incident review gets compressed into a rushed thirty minutes once the pressure's off — exactly backwards, since that's where the real value lives."
+image:
+  path: /assets/img/og-default.png
+  alt: "Post-Incident Review"
 ---
 The post-incident review is the step most likely to get compressed into a rushed thirty-minute meeting once the pressure of active response has passed and the on-call team has already worked a sixteen-hour day and just wants the retro off the calendar, which is exactly backwards, because the review is where the actual long-term value of having gone through the incident in the first place gets captured or lost.
 

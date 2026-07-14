@@ -5,6 +5,10 @@ date: 2026-07-12 00:01:00 +0530
 categories: ["Microsoft Entra", "Core Identity"]
 tags: ["microsoft entra", "identity", "active directory", "directory service", "fundamentals"]
 author: pankaj
+description: "Identity conversations start with authentication and MFA, which is backwards. Something has to know who someone actually is before any of that happens."
+image:
+  path: /assets/img/og-default.png
+  alt: "What Is a Directory Service?"
 ---
 
 Identity conversations tend to start with authentication, MFA, or Conditional Access, and that's usually backwards. Before you can authenticate anyone, something has to know who they are in the first place. It needs a place to store identities, organize them, retrieve them quickly, and answer basic questions like whether a user exists, what groups they belong to, whether their account is disabled, and which applications they should see. That place is a directory service, and if you're learning Microsoft Entra, understanding the directory is more valuable than memorizing individual features, because most identity services are simply different ways of reading from or writing to it.

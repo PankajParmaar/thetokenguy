@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "SIEM & Sentinel"]
 tags: ["sentinel", "analytics rules", "detection engineering"]
 author: pankaj
+description: "Sentinel rules that look fine on paper often collapse against real production noise. Where a detection engineer's time goes, and which rules matter first."
+image:
+  path: /assets/img/og-default.png
+  alt: "Analytics Rules"
 ---
 Analytics rules are what actually turn raw log ingestion in Sentinel into alerts and incidents, and the gap between a rule that looks reasonable on paper and one that survives contact with a real, noisy production environment is usually where most of a detection engineer's actual time goes.
 

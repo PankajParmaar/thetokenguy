@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Security Automation"]
 tags: ["powershell", "conditional-access", "entra-id", "backup"]
 author: pankaj
+description: "No native version history exists for Conditional Access beyond a basic audit entry. What to build before a cleanup pass accidentally locks out the org."
+image:
+  path: /assets/img/og-default.png
+  alt: "Conditional Access Policy Backup"
 ---
 Conditional access policies are some of the highest-stakes configuration in an entire tenant, and there's no native version history in the portal beyond the basic audit log entry showing that a policy changed. If someone edits a policy and locks out a chunk of the org, or a well-meaning admin "simplifies" a policy during a cleanup pass and removes a condition that mattered, there's no built-in rollback button. That gap is exactly why backing up conditional access policies as code, on a schedule, is one of the more valuable small habits in a tenant.
 

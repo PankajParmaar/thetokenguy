@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Network Access Control"]
 tags: ["entra-private-access", "ztna", "conditional-access"]
 author: pankaj
+description: "Entra Private Access gets the least attention in the Suite, mostly because most tenants already have a VPN answer. What it changes against real apps though."
+image:
+  path: /assets/img/og-default.png
+  alt: "Private Access in Entra"
 ---
 Microsoft Entra Private Access is the piece of the Entra Suite that gets the least attention compared to Conditional Access or PIM, probably because it's newer and because it competes in a space — private application access — that most tenants already have some answer for, usually a VPN or a third-party ZTNA product. Having set it up in a lab tenant against a couple of test internal apps, the thing that stood out is how directly it ties private app access into the same Conditional Access policy engine everything else in Entra ID already uses, rather than bolting on a separate console with its own rules.
 

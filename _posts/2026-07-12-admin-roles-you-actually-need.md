@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "Tenant Administration"]
 tags: ["microsoft365", "entraid", "rbac", "admin-roles"]
 author: pankaj
+description: "Global Administrator isn't a starter role, it's a blast radius. Which built-in Entra roles you actually need instead of the one that grants everything."
+image:
+  path: /assets/img/og-default.png
+  alt: "Admin Roles You Actually Need"
 ---
 Entra ID ships with well over a hundred built-in roles, and the temptation in a small tenant is to just hand out Global Administrator, since it's the role name that shows up first in every setup guide and it never fails to grant the access someone's asking for. It works because it grants access to everything, which is exactly the problem. Every Global Admin account is a full compromise of the tenant if that account's credentials or session gets stolen, and most people doing day-to-day admin work don't need anywhere near that blast radius.
 

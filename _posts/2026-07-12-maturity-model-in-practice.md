@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Principles & Architecture"]
 tags: ["zero-trust", "maturity-model", "security-architecture"]
 author: pankaj
+description: "CISA and Microsoft's Zero Trust maturity models share the same three-stage shape. What helps in a working tenant is honesty per pillar, not one stage."
+image:
+  path: /assets/img/og-default.png
+  alt: "Maturity Model in Practice"
 ---
 CISA and Microsoft both publish Zero Trust maturity models with the same three-stage shape: traditional, advanced, optimal. They are useful as a shared vocabulary, but the version that actually helps in a working tenant is less about which stage you claim to be in and more about being honest per pillar, because almost no organization sits at a uniform maturity level across identity, device, network, application, and data at the same time.
 

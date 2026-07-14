@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Copilot Security"]
 tags: ["oversharing", "data-governance", "m365", "copilot"]
 author: pankaj
+description: "Oversharing existed long before Copilot did — SharePoint sites still shared with everyone from projects that ended years ago. Why that stopped working."
+image:
+  path: /assets/img/og-default.png
+  alt: "Data Oversharing Risk"
 ---
 Oversharing existed long before Copilot did. Every organization I've read about or poked at in a lab has some version of the same story: a SharePoint site created for a project that ended, still shared "everyone in the company," sitting there because the offboarding checklist for that project never included a step to revoke the sharing link. That kind of sprawl was tolerable for years because the practical risk was bounded by how hard it is for a human to stumble onto the wrong file. Search tools existed, but keyword search against millions of documents mostly returns noise unless you already roughly know what you're looking for. AI assistants change that calculus completely, because they don't need you to know what you're looking for - they just need you to ask a question in plain language, and they'll go find whatever's technically accessible that seems relevant.
 

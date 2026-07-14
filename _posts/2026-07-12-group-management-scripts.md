@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Identity Automation"]
 tags: ["powershell", "groups", "entra-id", "access-management"]
 author: pankaj
+description: "Groups are the quiet backbone of nearly every access decision in Microsoft 365 — exactly why stale membership is such a persistent, compounding problem."
+image:
+  path: /assets/img/og-default.png
+  alt: "Group Management Scripts"
 ---
 Groups are the quiet backbone of almost every access decision in a Microsoft 365 tenant — conditional access policies, license assignment, SharePoint permissions, application role assignments, most of it eventually traces back to group membership. Which is exactly why group sprawl and stale membership are such a persistent problem: group ownership rarely gets assigned when the group is created, so there's no name attached when it comes time to review who's still in it. I've hit this directly during an access review — asked who owned a group granting access to a sensitive finance SharePoint site, and the owner field in Entra was blank, with the last membership change dated over two years earlier.
 

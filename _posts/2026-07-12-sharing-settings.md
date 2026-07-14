@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft 365", "SharePoint & OneDrive"]
 tags: ["sharepoint", "onedrive", "externalsharing", "governance"]
 author: pankaj
+description: "SharePoint and OneDrive sharing is layered — tenant, site, link level, each capped by the one above. Assuming a site setting protects you is the mistake."
+image:
+  path: /assets/img/og-default.png
+  alt: "Sharing Settings"
 ---
 External sharing in SharePoint and OneDrive operates on a layered model that's easy to misjudge if you only ever look at one layer of it. There's a tenant-level setting, a site-level setting that can only be as permissive as the tenant setting (never more), and a link-level choice made by whoever's actually sharing a file. Getting the layering backwards — assuming a restrictive site setting protects you when the tenant level is wide open, or vice versa — is where most sharing surprises come from.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "AI Agents & Access"]
 tags: ["ai-agents", "authentication", "identity", "oauth"]
 author: pankaj
+description: "Wiring an autonomous agent into internal APIs exposes how much of OAuth, SAML, and OIDC assumed a human sits at a browser proving who they actually are."
+image:
+  path: /assets/img/og-default.png
+  alt: "What an AI Agent Needs to Authenticate"
 ---
 I spent an afternoon in my lab last week trying to wire an autonomous agent into a set of internal APIs, and the exercise reminded me how much of our authentication tooling was never designed with this pattern in mind. We built OAuth, SAML, and OIDC around a fairly clean split: a human sits at a browser, proves who they are with a password or a passkey, and gets a token. An AI agent doesn't sit anywhere. It runs as a process, sometimes spawning sub-processes, sometimes calling out to other agents, and it needs to authenticate without a human present to click "allow" every single time.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["AI & Identity", "Identity in AI Pipelines"]
 tags: ["service-principal", "azure-ad", "ai-pipelines", "identity"]
 author: pankaj
+description: "Setting up a service principal for an AI pipeline felt routine, until building the pipeline end to end showed where it strains that pattern differently."
+image:
+  path: /assets/img/og-default.png
+  alt: "Service Principal for AI Workloads"
 ---
 Setting up a service principal for an AI pipeline in my lab tenant felt, at first, like the same task I'd done a hundred times for regular application integrations - register the app, grant it API permissions, generate a credential, wire it into the pipeline config. It took building the actual pipeline end to end before I noticed the ways an AI workload strains that pattern differently than a traditional service integration does, mostly around how many distinct downstream calls a single AI pipeline ends up making and how much broader the resulting permission footprint tends to be if you don't fight it deliberately.
 

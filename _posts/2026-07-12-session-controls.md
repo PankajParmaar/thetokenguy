@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Cloud App Security"]
 tags: ["session controls", "conditional access app control", "reverse proxy"]
 author: pankaj
+description: "Conditional Access discussions stop at the front door: allow or block sign-in. Session controls keep working after, via a mechanic that isn't intuitive."
+image:
+  path: /assets/img/og-default.png
+  alt: "Session Controls"
 ---
 Most conditional access discussions stop at the front door: allow or block the sign-in. Session controls are the part that keeps working after the user is already in, and they're the part that trips people up because the mechanism behind them, a reverse proxy, isn't intuitive if you're used to thinking of conditional access as a simple gate check.
 

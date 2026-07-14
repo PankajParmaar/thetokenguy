@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Zero Trust", "Principles & Architecture"]
 tags: ["zero-trust", "security-architecture", "least-privilege"]
 author: pankaj
+description: "Verify explicitly, use least privilege, assume breach — Zero Trust's principles read like a poster. Each maps to decisions easy to state, hard to finish."
+image:
+  path: /assets/img/og-default.png
+  alt: "The Three Principles"
 ---
 Microsoft's Zero Trust documentation, and most of the vendor literature that copies it, boils the model down to three principles: verify explicitly, use least privilege access, and assume breach. They read like a poster on a wall, but each one maps to a specific set of decisions you have to make in a real tenant, and each one is easy to state and genuinely hard to implement completely.
 

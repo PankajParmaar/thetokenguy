@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Entra", "Authentication"]
 tags: ["microsoft entra", "passwordless", "windows hello for business", "fido2", "microsoft authenticator", "passkeys", "authentication", "powershell"]
 author: pankaj
+description: "Let's go passwordless means something different in every mixed environment. One strategy built from several technologies, not a single standalone feature."
+image:
+  path: /assets/img/og-default.png
+  alt: "Passwordless Authentication in Practice"
 ---
 
 "Let's go passwordless" sounds straightforward until someone asks what that actually means in a mixed environment. For some users it means signing in with Microsoft Authenticator, for others it's Windows Hello for Business, privileged administrators might use FIDO2 security keys, and frontline workers often end up relying on passkeys stored on their phones. Passwordless isn't a single feature in Microsoft Entra — it's an authentication strategy built from several technologies that all remove the password from the normal sign-in flow, and each one carries its own deployment considerations.

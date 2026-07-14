@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Identity Defence"]
 tags: ["pass the hash", "ntlm", "credential theft"]
 author: pankaj
+description: "Pass-the-hash has been known for over a decade and still works in plenty of environments — proof of how hard NTLM is to retire, not just carelessness."
+image:
+  path: /assets/img/og-default.png
+  alt: "Pass-the-Hash"
 ---
 Pass-the-hash has been a known technique for well over a decade at this point, and it still works in a lot of environments today, which tells you more about how hard NTLM is to fully retire from a real enterprise than it does about anyone being careless.
 

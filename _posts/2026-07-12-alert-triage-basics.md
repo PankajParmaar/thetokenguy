@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["Microsoft Defender", "Threat Protection"]
 tags: ["alert triage", "soc", "microsoft defender"]
 author: pankaj
+description: "Forty alerts, twenty minutes, no lack of detections — just a queue nobody's sorted. The triage skill that separates a working SOC from a noisy channel."
+image:
+  path: /assets/img/og-default.png
+  alt: "Alert Triage Basics"
 ---
 Anyone who's spent time in front of a Defender alert queue knows the real problem isn't a lack of detections, it's deciding which of the forty alerts sitting there actually deserve the next twenty minutes of your attention. Triage is the unglamorous skill that separates a functioning security operation from one that's just generating a Teams channel full of alert notifications that pile up faster than anyone can work through them.
 

@@ -5,6 +5,10 @@ date: 2026-07-12
 categories: ["PowerShell & Graph", "Graph API"]
 tags: ["microsoft-graph", "graph-explorer", "powershell-sdk", "api"]
 author: pankaj
+description: "Every Graph query worth shipping started life tested somewhere else first. When to reach for Graph Explorer versus the PowerShell SDK directly instead."
+image:
+  path: /assets/img/og-default.png
+  alt: "Graph Explorer vs SDK"
 ---
 Every Graph query I've ever written in a script started life as a query I tested somewhere else first, because writing raw Graph calls blind and debugging permission errors inside a PowerShell script is a slower path than confirming the query shape works before it goes anywhere near production code. Knowing when to reach for Graph Explorer versus the PowerShell SDK directly is less about one being better and more about which stage of the work you're actually in.
 
