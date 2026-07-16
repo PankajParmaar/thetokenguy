@@ -24,7 +24,7 @@
     <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
       <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
-      <p class="hero-deck">Every identity system for 600 years has answered the same question — who do we trust, and how do we know? None of them reliably answer the harder one: do they still deserve that trust right now?</p>
+      <p class="hero-deck">From trial by ordeal to stolen signing keys — identity systems have changed technology for 600 years without solving the same problem.</p>
       {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
       <div class="hero-meta"><span>{{ author_name }}</span><span>{{ read_mins }} min read</span></div>
     </div>
