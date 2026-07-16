@@ -24,7 +24,7 @@
     <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
       <h1 class="hero-title">{{ featured.hero_title | default: featured.title }}</h1>
-      <p class="hero-deck">Face. Name. Wax seal. Passport. Smart card. JWT. Six hundred years of credential evolution — and someone is still finding a way through.</p>
+      <p class="hero-deck">Every identity system for 600 years has answered the same question — who do we trust, and how do we know? None of them reliably answer the harder one: do they still deserve that trust right now?</p>
       {% assign author_name = site.data.authors[featured.author].name | default: site.author.name %}
       <div class="hero-meta"><span>{{ author_name }}</span><span>{{ read_mins }} min read</span></div>
     </div>
@@ -33,7 +33,7 @@
   <main aria-label="Main Content">
   <div class="body-grid">
     <article class="article">
-      {% assign body_content = featured.content | replace_first: '<p>Sometime', '<p><span class="drop-cap">S</span>ometime' %}
+      {% assign body_content = featured.content | replace_first: '<p>Every', '<p><span class="drop-cap">E</span>very' %}
       {% include refactor-content.html content=body_content lang=lang %}
     </article>
 

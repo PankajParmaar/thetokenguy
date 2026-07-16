@@ -1,68 +1,48 @@
 ---
 layout: post
-title: "Iron Bar — The Access Token"
-hero_title: "Iron Bar &mdash; The <em>Access Token</em>"
+title: "The Iron Bar Never Went Away"
+hero_title: "The Iron Bar Never Went Away"
 date: 2026-07-12 00:10:00 +0530
 categories: [featured]
 sitemap: false
 hidden: true
 tags: [identity, access-tokens, history, jwt, zero-trust]
 author: pankaj
-description: "Face. Name. Wax seal. Passport. Smart card. JWT. Six hundred years of credential evolution — and someone is still finding a way through."
+description: "Six hundred years of identity systems have swapped iron bars for JWTs but never solved the real problem: trust that gets granted once and is never checked again."
 
 image:
   path: /assets/img/og-default.png
-  alt: "Iron Bar — The Access Token"
+  alt: "The Iron Bar Never Went Away"
 ---
 
-Sometime in the ninth century, if you stood accused and the evidence ran out, they handed you a bar of iron pulled from a fire.
+Every identity system for 600 years has answered the same question — who do we trust, and how do we know? None of them reliably answer the harder one: do they still deserve that trust right now? A token can be valid and a permission can be active long after the reason either was granted has disappeared.
 
-You'd carry it nine steps. Then they'd bandage your hand and check back in three days. Healed cleanly? God had verified your innocence. Still a mess? Also God, but with a different verdict. The Church administered the test, interpreted the result, and recorded the outcome. It was the identity provider. The priest was just the admin.
+In ninth-century Europe, someone accused of a crime might carry a red-hot iron bar nine steps. Three days later, a priest inspected the wound. Clean healing meant God had ruled the person innocent.
 
-This was called Trial by Ordeal. It was the official criminal justice system of medieval Europe for about four hundred years. It mostly worked. The priests who administered it would cool the bar for people they already trusted. Fire had nothing to do with it. Conditional access, ninth century edition. The system had a backdoor. The backdoor was called judgment. The role existed before the current team joined. It was never revoked.
+The iron had nothing to do with it. The system worked because people trusted the priest to read the result honestly — and the priest could bank the coals cooler for anyone he already believed. Four hundred years of criminal justice ran on that one unwritten permission.
 
-A few centuries later, in a different part of Europe, a different problem. Two people, same name, same town. Same UPN, different objects — and no authoritative directory to tell them apart. One of them has debts. One of them doesn't. One is in the tenant. The other one probably should be disabled by now. Neither has a token that proves anything. The one who argues better — who knows something, has something, or is something the magistrate believes — walks away with the other person's life. The loser inherits the accumulated disasters.
+Six centuries later, the iron bar became a token.
 
-The token is the iron bar. A JWT is a signed assertion — an issuer telling a resource that a subject has been verified, with a set of claims about what it's allowed to do. Three parts, base64 encoded, dot separated. The iss says who vouched for you. The aud says who should accept it. The exp says when it stops being valid.
+A token is a signed promise: someone verified you, and here's what you're allowed to do because of it. It carries an issuer, an audience, and an expiry — three facts, and one hidden assumption: that the promise is still true for as long as the expiry says it is.
 
-The exp claim is where the design tension lives. An access token in Entra ID is typically valid for around sixty minutes. Sixty minutes is long enough that authentication doesn't become friction. A stolen token, replayed from a different continent, works perfectly for the duration. The token doesn't know it was stolen. The resource doesn't either. It checks the signature. It checks the expiry. Both pass.
+In Entra ID, that promise typically lasts an hour. Long enough that you don't have to log in every ten minutes. Long enough, too, that a stolen token works exactly as well as a real one, for the whole hour, no matter which continent it's used from.
 
-This is where AiTM sits. The attack doesn't crack credentials. It proxies the entire authentication flow — the user authenticates through what appears to be a legitimate login page, MFA completes, the ESTSAUTH session cookie issues, and the attacker captures it in transit. MFA was satisfied. Conditional Access was satisfied. The amr claim in the token shows mfa. The sign-in logs show a successful authentication. The only signal is a SessionId that later appears from a different IP — if anyone is looking.
+This is how AiTM attacks succeed without breaking anything. The user logs in for real. MFA completes for real. The session cookie issues, and the attacker copies it in transit. Every signal a defender would check — the signature, the MFA claim, the sign-in log — comes back clean. The only thing that changed is who's holding the token now, and nothing in the token records that.
 
-The industry's answer was Continuous Access Evaluation. CAE inverts the model. Instead of trusting the token until exp, the resource can reject it mid-session when something changes — account disabled, password reset, a location shift that violates policy. In CAE-capable clients, token lifetimes extend to twenty-four or twenty-eight hours precisely because revocation becomes near real-time. If you've seen AADSTS50173 — the provided grant has expired due to it being revoked — that's CAE doing its job. The token was valid. Something changed. The session ended without waiting for exp.
+The industry's answer was Continuous Access Evaluation. Instead of trusting a token until it expires, the resource can kill it mid-session the moment something changes — the account gets disabled, the password gets reset, someone logs in from a location the policy doesn't allow. CAE doesn't ask "was this valid an hour ago?" It asks "does this still deserve trust right now?" — the same question the priest was supposed to ask and usually didn't.
 
-CAE works when both the client and the resource support it. A large portion of the application estate — third-party integrations, older line-of-business apps, anything that doesn't speak the CAE claim challenge protocol — sits outside it. When a CAE-incapable app issues an access token, the exp is the only enforcement boundary left. A stolen token with fifty minutes remaining is fifty minutes of uncontested access.
+Where CAE runs end to end, token lifetimes stretch to a full day, because revocation no longer waits for expiry to catch up. An estimated 30 to 40 percent of most enterprise application estates still can't speak the protocol — older line-of-business apps, third-party integrations that were never built for it. For that slice, the old rule returns: a stolen token is good for whatever time is left on the clock, and nobody's watching in between.
 
-The legacy MFA stack and the Authentication Methods Policy run in parallel in most tenants that have been live for more than four years. Per-user MFA, ADAL-based authentication, the old Authenticator app registration flow — none of it is automatically replaced when the Authentication Methods Policy is enabled. Two systems, same tenant, different controls, different audit surfaces. A user registered for MFA under the legacy stack doesn't appear correctly in the Authentication Methods Activity report. A Conditional Access policy requiring a specific authentication strength evaluates against the Authentication Methods Policy. If the user's registration lives in the legacy system, the evaluation produces AADSTS50076 or AADSTS50097 depending on which app they're hitting and which authentication library it's using. The migration path is documented. Running both systems simultaneously is the default state for tenants that enabled MFA before 2022 and haven't completed the migration.
+Most tenants still run two systems at once: the old per-user MFA and SSPR settings, and the newer, unified Authentication Methods Policy meant to replace them. Since September 2025, admins can no longer edit the old settings — but whatever was already configured there keeps running, respected right alongside the new policy, until someone deliberately switches the tenant over.
 
-The product direction is readable. FIDO2 and passkeys replace the transmitted secret with a private key that never leaves the secure enclave. An AiTM proxy sitting between the user and login.microsoftonline.com captures nothing — the challenge-response is local, the signature is bound to the real domain, the ceremony cannot be relayed without the device that holds the key.
+That overlap is the trap. A method disabled in the new policy can still work if it's quietly still enabled in the old one — Entra checks all of them, and a user only needs one to say yes. Nothing alerts an admin when that happens. It shows up later, usually when someone asks why an account can still sign in with a method that was supposedly turned off months ago.
 
-Passkeys work cleanly for browser-based flows against modern IdPs. A line-of-business application authenticating over LDAP against a directory that hasn't moved since 2014 is a different conversation. Most enterprise application estates span both. NIST SP 800-63-4, finalised in July 2025, mandates phishing-resistant authentication at AAL2. A significant portion of the installed base doesn't meet it. The migration runs through a hybrid state with no defined end date, and during that transition the weakest authentication method in the chain sets the actual exposure.
+Passkeys close the gap AiTM opened. Instead of a password or a code that can be copied in transit, the proof lives on the device and never leaves it — nothing crosses the wire for an attacker to catch. The device also checks that it's talking to the real domain before it responds, so a proxy sitting on a lookalike page gets refused, not relayed.
 
-From an administrator's perspective, CAE, token protection in Conditional Access, sign-in risk policies, phishing-resistant authentication strengths — all of it is available. Which applications in the estate are CAE-capable. Which service principals last rotated their secrets before the current team joined. Which Conditional Access policies have exception groups added during a 2am incident and never revisited. The EU Digital Identity Wallet rollout, the UAE's March 2026 OTP elimination deadline, India's April 2026 directive — regulators are moving faster than most estate audits.
+It's a real fix, but only where it can reach — and only as strong as whatever recovery option sits behind it. A modern app talking to a modern identity provider gets the full benefit. A line-of-business system still authenticating the way it did in 2014 doesn't. The strongest method available means nothing to the systems still running on the weakest one, and an unhardened fallback path is just one more trust relationship left unchecked.
 
-Post-quantum cryptography is a separate thread. The FIDO Alliance demoed post-quantum passkey signing at Authenticate 2025. YubiKey previewed hardware-backed post-quantum credentials. The standards are stabilising. The OAuth application grants registered in 2019 are the more immediate problem for most tenants.
+In 2023, a hacking group tied to Chinese intelligence read the email of a U.S. Commerce Secretary and an American ambassador, using a cloud identity provider's signing key that had been sitting unrevoked since 2016. Every token they forged with it was cryptographically valid. Every signature check passed. The provider didn't catch it. A government analyst noticed the access pattern looked wrong, a month in.
 
-Shadow admins accumulate through nested group membership. Three hops through security groups created before the current team joined, and an account ends up with Global Administrator equivalent permissions. The role assignment report shows nothing. PIM shows nothing. A recursive group membership query against the directory shows everything — permissions inherited through groups that inherited from other groups, in a chain that has compounded across several years of org changes and project assignments.
+The review board that investigated called it "the cryptographic equivalent of crown jewels" — and found the breach came down to a cascade of ordinary failures, not a broken algorithm. Nothing about the math was ever in question. The key just kept working long after anyone should have still trusted it.
 
-Service principals outnumber human users in most tenants that have been running for more than three years. A significant portion carry client secrets rather than certificates. A portion of those secrets haven't rotated since the application was registered. The application owner left. The team that inherited it changed twice. The secret is still valid. The permissions were scoped to Contributor on a production subscription because that is what the developer needed to get the integration working on a Friday afternoon.
-
-The client secret problem has a cleaner answer. Workload identity federation lets a GitHub Actions workflow or an Azure DevOps pipeline authenticate to Entra without a secret — the external token issued by the CI/CD platform is exchanged directly for an Entra access token through a configured federated credential. No secret stored in a pipeline variable. No rotation schedule. No expiry that someone has to track. A misconfigured federated credential produces AADSTS70021 — no matching federated identity record found — and the pipeline fails immediately. Adoption is patchy. Teams that haven't encountered it default to client secrets because the setup is unfamiliar and the pipeline works on the first try.
-
-Break-glass accounts sit outside PIM and Conditional Access by design — that is the point of them. They also sit outside the monitoring that would flag an impossible travel event on a standard account. The breach investigation starts there.
-
-HRIS drift is the quiet one. A contractor offboards. The termination ticket is raised. The handoff between HR and IT breaks somewhere in the process. The Entra account stays active. The account authenticates. AADSTS50076 doesn't fire — that requires an interactive prompt, it doesn't block. The token issues. The exp ticks down. Nothing surfaces until someone runs `Get-MgUser -Filter "userType eq 'Guest'" | Where {$_.AccountEnabled -eq $true}` and finds accounts with no sign-in activity in eleven months, still sitting in the directory.
-
-A user connects Canva to their work account in 2021. The consent prompt asks for Mail.Read and Files.ReadWrite.All. The user clicks Accept because the app needs it to function. The grant sits in the tenant under Enterprise Applications. Three years later the user is on a different team, using a different set of tools, and the OAuth grant is still active, still scoped, still presenting valid tokens to Canva's backend on every request.
-
-Default Entra ID allows users to consent to apps requesting low-privilege permissions without admin involvement. Mail.Read across the entire mailbox qualifies as low-privilege by that definition. An attacker registers an OAuth app, makes it look credible, a user grants consent, and the app has background access to email and calendar for as long as the grant exists. The grant doesn't expire. Revocation requires the user to remember granting it.
-
-`Get-MgOAuth2PermissionGrant -All | Where {$_.Scope -like "*Mail*"}` run against a tenant live for three or more years. Schedule an afternoon.
-
-An organisation federates with a partner tenant for a project. The default inbound cross-tenant access settings accept MFA claims from the external tenant. The partner tenant's MFA posture is unknown — what authentication methods they have enabled, whether their Conditional Access policies are enforced, whether they completed the Authentication Methods migration. The amr claim in the inbound token says mfa. Entra accepts it. The session proceeds. Cross-tenant access settings allow inbound trust to be scoped — accepting MFA claims only from specific tenants, or requiring re-evaluation against the local tenant's policies. Most tenants that set up B2B federation for a project deadline haven't revisited the trust settings since.
-
-Trace identity back far enough and you arrive at a lookup table. X.500, the standard that eventually became the conceptual backbone of Active Directory, was modelled on directory services. A name, some attributes, a way to find things. The Yellow Pages had entries. X.500 had entries. Active Directory has entries. Entra ID has entries. The technology reinvents itself every decade and the underlying idea sits there unchanged, patient as a monk with a hot iron bar, waiting for someone to rediscover it and call it innovation.
-
-I've spent fifteen years inside this. I once watched a very confident administrator run a full sync on a live production tenant instead of a delta. Not because they didn't know the difference. What followed was the kind of meeting where a senior stakeholder says *"I want to step back a bit"* — which is corporate language for *"I need a moment to not be visibly associated with what is currently happening."*
-
-We automated the ordeal. We forgot the judgment.
+The iron bar disappeared a thousand years ago. The habit it ran on is still signing production tokens today.
